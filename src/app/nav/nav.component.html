@@ -7,12 +7,12 @@
     <a routerLink="/terkep">Térkép</a>
     <a routerLink="/photos">Photos</a>
     <a routerLink="/merch">Merch</a>
-    <a routerLink="/register" class="register">Regisztráció</a>
+    <a routerLink="/login">Bejelentkezés</a>
   </div>
-
   <label class="burger" (click)="toggleMenu()">
     <span [class.open]="isMenuOpen"></span>
     <span [class.open]="isMenuOpen"></span>
     <span [class.open]="isMenuOpen"></span>
   </label>
 </nav>
+<router-outlet></router-outlet>

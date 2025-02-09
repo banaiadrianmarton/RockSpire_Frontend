@@ -1,0 +1,129 @@
+button,
+input {
+  border: none;
+  box-shadow: none;
+}
+
+a {
+  color: #573d3b;
+  font-weight: 600;
+  transition: all ease-in-out 150ms;
+
+  &:hover {
+    color: #fea71c;
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
+:where(.btn--primary) {
+  margin-block: 1em;
+  margin-inline: auto;
+}
+
+.btn--primary {
+  display: block;
+  cursor: pointer;
+  padding: 1em 2em;
+  margin-block: 1em;
+  border-radius: 30px;
+  color: #fea71c;
+  background: rgba(112, 122, 116, 0.3);
+  border: 1px solid rgba(112, 122, 116, 0.4);
+  transition: box-shadow ease-in-out 150ms, scale ease-in-out 200ms;
+
+  &:hover {
+    box-shadow: 0px 0px 20px rgba(112, 122, 116, 0.3);
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.register {
+  height: 100vh;
+  background-image: url('/minta.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.register__card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  max-width: 380px;
+  width: 96%;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fea71c;
+  padding: 2em;
+  border-radius: 30px;
+  border: 1px solid rgba(112, 122, 116, 0.4);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out forwards;
+
+  & .icon-store {
+    margin-bottom: 1em;
+    display: flex;
+    padding: 0.5em;
+    border-radius: 50vw;
+    color: #fea71c;
+    background: rgba(112, 122, 116, 0.2);
+    border: 1px solid rgba(112, 122, 116, 0.4);
+    align-self: center;
+  }
+
+  & .register__sign-in {
+    margin-top: 1em;
+    align-self: center;
+    font-size: 80%;
+  }
+
+  & .register__title {
+    align-self: center;
+    margin-bottom: 0.5em;
+  }
+
+  label {
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+    letter-spacing: 1px;
+    opacity: 1;
+    font-weight: 300;
+    margin-left: 1em;
+    font-size: 80%;
+  }
+
+  input {
+    width: 100%;
+    border-radius: 30px;
+    padding: 1em;
+    color: #fea71c;
+    background: rgba(112, 122, 116, 0.3);
+    border: 1px solid rgba(112, 122, 116, 0.4);
+
+    &::placeholder {
+      opacity: 0.5;
+      color: #fea71c;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    scale: 0.95;
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

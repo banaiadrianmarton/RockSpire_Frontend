@@ -10,20 +10,18 @@ nav {
 .menu {
   display: flex;
   gap: 1em;
-
   a {
+    cursor: pointer;
     text-decoration: none;
     color: white;
     font-weight: 600;
     transition: all 0.3s;
-
     &:hover {
       color: orange;
     }
   }
 }
 
-/* Hamburger ikon */
 .burger {
   display: none;
   width: 40px;
@@ -88,7 +86,6 @@ nav {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
-
     &.active {
       opacity: 1;
       pointer-events: all;
