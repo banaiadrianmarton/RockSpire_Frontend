@@ -11,7 +11,7 @@
 }
 
 .login__card {
-  position: relative; /* vagy absolute, ha inkább így akarsz pozícionálni */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: start;

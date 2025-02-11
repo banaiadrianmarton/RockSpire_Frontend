@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px auto;
+  justify-content: center;
+  gap: 15px;
+  max-width: 1000px;
+  width: 96%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fea71c;
+  padding: 2em;
+  border-radius: 15px;
+  border: 1px solid rgba(112, 122, 116, 0.4);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.background {
+  height: 100vh;
+  padding-top: 1px;
+  background-image: url("/minta.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container a {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.container a:nth-child(odd) img {
+  animation: float 3s ease-in-out infinite;
+}
+.container a:nth-child(even) img {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    scale: 0.95;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
