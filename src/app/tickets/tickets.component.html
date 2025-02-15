@@ -1,5 +1,16 @@
-<div class="container">
-  <h1>Teszt tickets</h1>
+<div class="background">
+  <div class="container">
+    <div class="ticket-container">
+      <h2>Elérhető jegyek</h2>
+      <div class="ticket-card" *ngFor="let ticket of tickets">
+        <h3>{{ ticket.name }}</h3>
+        <p class="price">{{ ticket.price }} Ft</p>
+        <button class="btn--primary" (click)="buyTicket(ticket)">
+          Vásárlás
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

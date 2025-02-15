@@ -6,7 +6,7 @@
   gap: 15px;
   max-width: 1000px;
   width: 96%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   color: #fea71c;
   padding: 2em;
   border-radius: 15px;
@@ -18,7 +18,7 @@
 .background {
   height: 100vh;
   padding-top: 1px;
-  background-image: url("/minta.jpg");
+  background-image: url("/banner.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

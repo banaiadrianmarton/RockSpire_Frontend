@@ -2,12 +2,11 @@
   <div class="menu" [class.active]="isMenuOpen">
     <a routerLink="/">Főoldal</a>
     <a routerLink="/tickets">Jegyek</a>
-    <a routerLink="/camping">Camping hely</a>
-    <a routerLink="/mobilapp">Mobilapp</a>
+    <a routerLink="/camping">Kemping</a>
+    <!-- <a routerLink="/mobilapp">Mobilapp</a> -->
     <a routerLink="/map">Térkép</a>
-    <a routerLink="/photos">Photos</a>
-    <a routerLink="/merch">Merch</a>
-    <a routerLink="/login">Bejelentkezés</a>
+    <a routerLink="/photos">Galéria</a>
+    <a routerLink="/login"><span class="nav-login">Bejelentkezés</span></a>
   </div>
   <label class="burger" (click)="toggleMenu()">
     <span [class.open]="isMenuOpen"></span>

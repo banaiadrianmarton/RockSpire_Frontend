@@ -1,6 +1,6 @@
 .login {
   height: 100vh;
-  background-image: url("/minta.jpg");
+  background-image: url("/banner.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@
   align-items: start;
   max-width: 380px;
   width: 96%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   color: #fea71c;
   padding: 2em;
   border-radius: 30px;
@@ -70,7 +70,7 @@ input {
   }
 }
 
-/* @keyframes fadeIn {
+@keyframes fadeIn {
   0% {
     opacity: 0;
     transform: translateY(-30px);
@@ -79,4 +79,4 @@ input {
   100% {
     opacity: 1;
   }
-} */
+}

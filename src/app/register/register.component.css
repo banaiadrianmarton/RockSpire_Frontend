@@ -45,7 +45,7 @@ a {
 
 .register {
   height: 100vh;
-  background-image: url("/minta.jpg");
+  background-image: url("/banner.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -61,7 +61,7 @@ a {
   max-width: 380px;
   width: 96%;
   backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   color: #fea71c;
   padding: 2em;
   border-radius: 30px;
