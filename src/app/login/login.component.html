@@ -31,10 +31,22 @@
       placeholder="Felhasználónév"
       name="username"
       id="username"
+      [(ngModel)]="model.username"
     />
     <label for="password">Jelszó megadása</label>
-    <input type="password" placeholder="Jelszó" name="password" id="password" />
-    <button type="submit" class="btn--primary">Bejelentkezés</button>
+    <input
+      type="password"
+      placeholder="Jelszó"
+      name="password"
+      id="password"
+      [(ngModel)]="model.password"
+    />
+    <button type="submit" class="btn--primary" (click)="login()">
+      Bejelentkezés
+    </button>
+    @if(errorMessage){
+    <div class="error-message" id="error-msg">{{ errorMessage }}</div>
+    }
     <div class="login__sign-in">
       <p>Nincsen még fiókod? <a routerLink="/register">Regisztráció</a></p>
     </div>
