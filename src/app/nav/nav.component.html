@@ -1,17 +1,21 @@
 <nav>
-  <div class="menu" [class.active]="isMenuOpen">
-    <a routerLink="/">Főoldal</a>
-    <a routerLink="/tickets">Jegyek</a>
-    <a routerLink="/camping">Kemping</a>
-    <!-- <a routerLink="/mobilapp">Mobilapp</a> -->
-    <a routerLink="/map">Térkép</a>
-    <a routerLink="/photos">Galéria</a>
-    <a routerLink="/login"><span class="nav-login">Bejelentkezés</span></a>
+  <div class="burger" (click)="toggleMenu()">
+    <span [class.open]="isMenuOpen"></span>
+    <span [class.open]="isMenuOpen"></span>
+    <span [class.open]="isMenuOpen"></span>
   </div>
-  <label class="burger" (click)="toggleMenu()">
-    <span [class.open]="isMenuOpen"></span>
-    <span [class.open]="isMenuOpen"></span>
-    <span [class.open]="isMenuOpen"></span>
-  </label>
+
+  <div class="menu-wrapper" [class.active]="isMenuOpen">
+    <div class="menu">
+      <a routerLink="/">Főoldal</a>
+      <a routerLink="/tickets">Jegyek</a>
+      <a routerLink="/camping">Kemping</a>
+      <a routerLink="/map">Térkép</a>
+      <a routerLink="/photos">Galéria</a>
+    </div>
+
+    <a routerLink="/login" class="nav-login">Bejelentkezés</a>
+  </div>
 </nav>
+
 <router-outlet></router-outlet>
