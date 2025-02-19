@@ -12,9 +12,9 @@ export class AuthService {
 
   constructor(private configService: ConfigService, private http: HttpClient) {}
 
-  login(model: { username: string; password: string }): Observable<boolean> {
+  login(model: { name: string; password: string }): Observable<boolean> {
     return this.http
-      .post<UserModel>(`${this.configService.apiUrl}/auth/login`, model)
+      .post<UserModel>(`${this.configService.apiUrl}/api/login`, model)
       .pipe(
         map((result: UserModel) => {
           this.loggedinUser = result;
@@ -34,7 +34,7 @@ export class AuthService {
       localStorage.removeItem('user');
       this.http
         .post(
-          `${this.configService.apiUrl}/auth/logout`,
+          `${this.configService.apiUrl}/api/logout`,
           {},
           { headers: header }
         )

@@ -10,7 +10,11 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavComponent {
   isMenuOpen = false;
-  constructor() {}
+  constructor(public authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

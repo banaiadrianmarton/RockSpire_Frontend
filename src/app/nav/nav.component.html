@@ -13,8 +13,14 @@
       <a routerLink="/map">Térkép</a>
       <a routerLink="/photos">Galéria</a>
     </div>
+    @if(!authService.loggedinUser){
 
     <a routerLink="/login" class="nav-login">Bejelentkezés</a>
+    } @else {
+    <a routerLink="/login" (click)="logout()" class="nav-login"
+      >Kijelentkezés</a
+    >
+    }
   </div>
 </nav>
 

@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   model = {
-    username: '',
+    name: '',
     password: '',
   };
 
@@ -22,7 +22,7 @@ export class LoginComponent {
 
   login() {
     this.errorMessage = '';
-    if (this.model.username || this.model.password) {
+    if (!this.model.name || !this.model.password) {
       this.errorMessage = 'Kérem adja meg az adatokat!';
     } else {
       this.authService.login(this.model).subscribe({
@@ -30,13 +30,12 @@ export class LoginComponent {
           if (!successful) {
             this.errorMessage = 'Váratlan hiba...';
           } else {
-            if (this.authService.loggedinUser?.role.includes('admin')) {
-              this.router.navigate(['home']);
-            } else if (this.authService.loggedinUser?.role.includes('user')) {
-              this.router.navigate(['tickets']);
-            } else {
-              this.router.navigate(['home']);
-            }
+            // if (this.authService.loggedinUser?.role.includes('admin')) {
+            //   this.router.navigate(['home']);
+            // } else if (this.authService.loggedinUser?.role.includes('user')) {
+            //   this.router.navigate(['tickets']);
+            // } else {
+            this.router.navigate(['home']);
           }
         },
         error: (err: any) => {
