@@ -20,14 +20,14 @@ export class AuthService {
           this.loggedinUser = result;
           localStorage.setItem('user', JSON.stringify(result));
           return true;
-        })
+        }),
       );
   }
 
   logout() {
     if (this.loggedinUser && this.loggedinUser.token) {
       const header = new HttpHeaders().set(
-        'Authorization',
+        'Authorization', 'Bearer ' +
         this.loggedinUser.token
       );
       this.loggedinUser = null;
