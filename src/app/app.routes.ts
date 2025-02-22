@@ -3,11 +3,17 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TicketsComponent } from './tickets/tickets.component';
+import { CampingComponent } from './camping/camping.component';
+import { MapComponent } from './map/map.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'tickets', component: TicketsComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'tickets', component: TicketsComponent },
+  { path: 'camping', component: CampingComponent },
+  { path: 'map', component: MapComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },

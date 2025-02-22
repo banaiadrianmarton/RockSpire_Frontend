@@ -1,0 +1,29 @@
+<div class="background">
+  <div class="container">
+    <div class="camping-container">
+      <h2>Elérhető Camping Helyek</h2>
+      <div class="camping-card" *ngFor="let spot of campingSpots">
+        <h3>{{ spot.type }}</h3>
+        <p class="price">{{ spot.price }} Ft / éj</p>
+        <p class="availability">Elérhető: {{ spot.availability }} hely</p>
+
+        <div class="quantity-container">
+          <button class="btn--secondary" (click)="decreaseQuantity(spot)">
+            -
+          </button>
+          <span>{{ spot.quantity }}</span>
+          <button class="btn--secondary" (click)="increaseQuantity(spot)">
+            +
+          </button>
+        </div>
+        <button
+          class="btn--primary"
+          (click)="bookSpot(spot)"
+          [disabled]="spot.quantity === 0"
+        >
+          Foglalás
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,6 @@
   flex-wrap: wrap;
   margin: 5px auto;
   justify-content: center;
-  gap: 15px;
   max-width: 1000px;
   width: 96%;
   background: rgba(0, 0, 0, 0.9);
@@ -15,11 +14,55 @@
   animation: fadeIn 1s ease-in-out forwards;
 }
 
+.quantity-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-container button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  border-radius: 30px;
+}
+
+.quantity-container span {
+  min-width: 30px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+:where(.btn--secondary) {
+  margin-inline: auto;
+}
+.btn--secondary {
+  display: flex;
+  cursor: pointer;
+  padding: 1em 2em;
+  margin-block: 0.5em;
+  color: #fea71c;
+  background: rgba(112, 122, 116, 0.3);
+  border: 1px solid rgba(112, 122, 116, 0.4);
+  transition: box-shadow ease-in-out 150ms, scale ease-in-out 200ms;
+
+  &:hover {
+    box-shadow: 0px 0px 20px rgba(112, 122, 116, 0.3);
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
 .ticket-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .ticket-card {

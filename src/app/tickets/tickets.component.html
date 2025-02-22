@@ -3,14 +3,27 @@
     <div class="ticket-container">
       <h2>Elérhető jegyek</h2>
       <div class="ticket-card" *ngFor="let ticket of tickets">
-        <h3>{{ ticket.name }}</h3>
+        <h3>{{ ticket.type }}</h3>
         <p class="price">{{ ticket.price }} Ft</p>
-        <button class="btn--primary" (click)="buyTicket(ticket)">
+        <p class="availability">Elérhető: {{ ticket.availability }} db</p>
+
+        <div class="quantity-container">
+          <button class="btn--secondary" (click)="decreaseQuantity(ticket)">
+            -
+          </button>
+          <span>{{ ticket.quantity }}</span>
+          <button class="btn--secondary" (click)="increaseQuantity(ticket)">
+            +
+          </button>
+        </div>
+        <button
+          class="btn--primary"
+          (click)="buyTicket(ticket)"
+          [disabled]="ticket.quantity === 0"
+        >
           Vásárlás
         </button>
       </div>
     </div>
   </div>
 </div>
-
-<router-outlet></router-outlet>
