@@ -52,6 +52,8 @@ a {
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: -1;
+  position: relative;
 }
 
 .register__card {
