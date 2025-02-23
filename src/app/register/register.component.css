@@ -118,6 +118,15 @@ a {
   }
 }
 
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

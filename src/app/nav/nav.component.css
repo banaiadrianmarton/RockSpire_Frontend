@@ -27,7 +27,7 @@ nav {
 
 .menu {
   display: flex;
-  gap: 5em;
+  gap: 4em;
   z-index: 1000;
 }
 

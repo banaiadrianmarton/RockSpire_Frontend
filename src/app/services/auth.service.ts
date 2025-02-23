@@ -20,15 +20,15 @@ export class AuthService {
           this.loggedinUser = result;
           localStorage.setItem('user', JSON.stringify(result));
           return true;
-        }),
+        })
       );
   }
 
   logout() {
     if (this.loggedinUser && this.loggedinUser.token) {
       const header = new HttpHeaders().set(
-        'Authorization', 'Bearer ' +
-        this.loggedinUser.token
+        'Authorization',
+        'Bearer ' + this.loggedinUser.token
       );
       this.loggedinUser = null;
       localStorage.removeItem('user');
@@ -40,5 +40,25 @@ export class AuthService {
         )
         .subscribe();
     }
+  }
+
+  register(model: {
+    name: string;
+    email: string;
+    password: string;
+    confirmedPassword: string;
+  }): Observable<boolean> {
+    return this.http
+      .post<UserModel>(`${this.configService.apiUrl}/api/register`, {
+        name: model.name,
+        email: model.email,
+        password: model.password,
+        password_confirmation: model.confirmedPassword,
+      })
+      .pipe(
+        map((result: UserModel) => {
+          return !!result;
+        })
+      );
   }
 }
