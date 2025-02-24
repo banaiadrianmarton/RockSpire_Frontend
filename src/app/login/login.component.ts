@@ -22,26 +22,32 @@ export class LoginComponent {
 
   login() {
     this.errorMessage = '';
+
     if (!this.model.name || !this.model.password) {
-      this.errorMessage = 'Kérem adja meg az adatokat!';
-    } else {
-      this.authService.login(this.model).subscribe({
-        next: (successful: boolean) => {
-          if (!successful) {
-            this.errorMessage = 'Váratlan hiba...';
-          } else {
-            // if (this.authService.loggedinUser?.role.includes('admin')) {
-            //   this.router.navigate(['home']);
-            // } else if (this.authService.loggedinUser?.role.includes('user')) {
-            //   this.router.navigate(['tickets']);
-            // } else {
-            this.router.navigate(['home']);
-          }
-        },
-        error: (err: any) => {
-          this.errorMessage = err.error?.message ?? err.message;
-        },
-      });
+      this.errorMessage = 'Kérem adja meg a felhasználónevet és jelszót!';
+      return;
     }
+
+    this.authService.login(this.model).subscribe({
+      next: (successful: boolean) => {
+        if (!successful) {
+          this.errorMessage = 'Hibás bejelentkezési adatok!';
+        } else {
+          console.log(
+            'Bejelentkezett felhasználó:',
+            this.authService.loggedinUser
+          );
+
+          if (this.authService.loggedinUser?.is_admin) {
+            this.router.navigate(['admin']);
+          } else {
+            this.router.navigate(['profile']);
+          }
+        }
+      },
+      error: (err: any) => {
+        this.errorMessage = err.error?.message ?? 'Bejelentkezési hiba!';
+      },
+    });
   }
 }

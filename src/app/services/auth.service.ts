@@ -3,6 +3,7 @@ import { ConfigService } from './config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserModel } from '../models/user.model';
 import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +11,40 @@ import { map, Observable } from 'rxjs';
 export class AuthService {
   loggedinUser: UserModel | null = null;
 
-  constructor(private configService: ConfigService, private http: HttpClient) {}
+  constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+    private router: Router
+  ) {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.loggedinUser = JSON.parse(user);
+    }
+  }
 
   login(model: { name: string; password: string }): Observable<boolean> {
     return this.http
-      .post<UserModel>(`${this.configService.apiUrl}/api/login`, model)
+      .post<{ user: UserModel; token: string }>(
+        `${this.configService.apiUrl}/api/login`,
+        model
+      )
       .pipe(
-        map((result: UserModel) => {
-          this.loggedinUser = result;
-          localStorage.setItem('user', JSON.stringify(result));
-          return true;
+        map((result) => {
+          if (result && result.user) {
+            this.loggedinUser = {
+              id: result.user.id,
+              name: result.user.name,
+              email: result.user.email,
+              is_admin: !!result.user.is_admin,
+              token: result.token,
+              password: result.user.password,
+              passwordConfirm: result.user.passwordConfirm,
+            };
+
+            localStorage.setItem('user', JSON.stringify(this.loggedinUser));
+            return true;
+          }
+          return false;
         })
       );
   }
@@ -39,6 +64,7 @@ export class AuthService {
           { headers: header }
         )
         .subscribe();
+      this.router.navigate(['/login']);
     }
   }
 

@@ -6,6 +6,8 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { CampingComponent } from './camping/camping.component';
 import { MapComponent } from './map/map.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,5 +18,7 @@ export const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'admin', component: AdminComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

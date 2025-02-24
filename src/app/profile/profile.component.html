@@ -1,0 +1,11 @@
+<div *ngIf="user && !user.is_admin">
+  <div class="background">
+    <div class="container">
+      <div class="profile-info">
+        <h2>Profil</h2>
+        <p>Név: {{ user.name }}</p>
+        <p>Email: {{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>

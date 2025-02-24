@@ -13,14 +13,34 @@
       <a routerLink="/map">Térkép</a>
       <a routerLink="/gallery">Galéria</a>
     </div>
-    @if(!authService.loggedinUser){
+    <ng-container *ngIf="authService.loggedinUser; else loginLink">
+      <div class="nav-login" (click)="toggleProfileMenu()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-circle-user-round"
+        >
+          <path d="M18 20a6 6 0 0 0-12 0" />
+          <circle cx="12" cy="10" r="4" />
+          <circle cx="12" cy="12" r="10" />
+        </svg>
+      </div>
+      <div class="profile-dropdown" [class.show]="isProfileMenuOpen">
+        <a routerLink="profile">Profil</a>
+        <a (click)="logout()">Kijelentkezés</a>
+      </div>
+    </ng-container>
 
-    <a routerLink="/login" class="nav-login">Bejelentkezés</a>
-    } @else {
-    <a routerLink="/login" (click)="logout()" class="nav-login"
-      >Kijelentkezés</a
-    >
-    }
+    <ng-template #loginLink>
+      <a routerLink="/login" class="nav-login">Bejelentkezés</a>
+    </ng-template>
   </div>
 </nav>
 <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 export interface UserModel {
   id: number;
-  role: string[];
+  is_admin: boolean;
   name: string;
   email: string;
   password: string;

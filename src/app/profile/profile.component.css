@@ -1,0 +1,40 @@
+.profile-info {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px auto;
+  justify-content: center;
+  gap: 15px;
+  max-width: 1000px;
+  width: 96%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fea71c;
+  padding: 2em;
+  border-radius: 15px;
+  border: 1px solid rgba(112, 122, 116, 0.4);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.background {
+  height: 100vh;
+  padding-top: 1px;
+  background-image: url("/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: -1;
+  position: relative;
+}
