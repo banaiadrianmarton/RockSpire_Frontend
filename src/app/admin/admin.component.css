@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px auto;
+  justify-content: center;
+  gap: 15px;
+  max-width: 1000px;
+  width: 96%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fea71c;
+  padding: 2em;
+  border-radius: 15px;
+  border: 1px solid rgba(112, 122, 116, 0.4);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.background {
+  height: 130vh;
+  padding-top: 1px;
+  background-image: url("/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: -1;
+  position: relative;
+}
+h2 {
+  margin-bottom: 1em;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fea71c;
+  background: black;
+  color: white;
+}
+
+button {
+  background: #fea71c;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ffbe3b;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: black;
+  border: 1px solid #fea71c;
+  border-radius: 5px;
+  width: 100%;
+}
+
+li button {
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+li button:hover svg {
+  stroke: white;
+}
