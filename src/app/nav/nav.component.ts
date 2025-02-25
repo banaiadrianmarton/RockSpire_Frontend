@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,16 +11,14 @@ import { CommonModule } from '@angular/common';
 })
 export class NavComponent {
   isMenuOpen = false;
-  isProfileMenuOpen = false;
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private router: Router) {}
+
+  navigateToProfile() {
+    this.router.navigate(['profile']);
+  }
 
   logout() {
     this.authService.logout();
-    this.isProfileMenuOpen = false;
-  }
-
-  toggleProfileMenu() {
-    this.isProfileMenuOpen = !this.isProfileMenuOpen;
   }
 
   toggleMenu() {
