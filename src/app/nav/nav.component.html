@@ -12,6 +12,9 @@
       <a routerLink="/camping">Kemping</a>
       <a routerLink="/map">Térkép</a>
       <a routerLink="/gallery">Galéria</a>
+      @if(authService.loggedinUser?.is_admin == true){
+      <a routerLink="/admin">Admin</a>
+      }
     </div>
     <ng-container *ngIf="authService.loggedinUser; else loginLink">
       <div class="nav-login">
