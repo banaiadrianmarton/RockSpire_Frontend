@@ -1,22 +1,24 @@
 <section class="background">
   <div class="container">
-    <a href=""><img src="band_logos/Babymetal-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Pantera-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Judas-Priest-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Gojira-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Ghost-Logo.png" alt="image" /></a>
-    <a href=""
-      ><img src="band_logos/System-of-a-Down-Logo.png" alt="image"
-    /></a>
-    <a href=""><img src="band_logos/Korn-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Trivium-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Black-Sabbath-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Iron-Maiden-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Slayer-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Kiss-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Metallica-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Rammstein-Logo.png" alt="image" /></a>
-    <a href=""><img src="band_logos/Ozzy-Osbourne-Logo.png" alt="image" /></a>
+    @for (image of paginatedImages; track $index ) {
+    <a (click)="navigateToProfile()"> <img [src]="image" alt="image" /></a>
+    }
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 0">Előző</button>
+      <span>{{ currentPage + 1 }}</span>
+      <button
+        (click)="nextPage()"
+        [disabled]="(currentPage + 1) * pageSize >= images.length"
+      >
+        Következő
+      </button>
+    </div>
   </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
+    </div>
+  </footer>
 </section>
 <router-outlet></router-outlet>

@@ -1,3 +1,14 @@
 <div class="background">
-  <div class="container"></div>
+  <div class="container">
+    @for (image of images; track $index) {
+    <div class="image-wrapper">
+      <img [src]="image" alt="Gallery Image" />
+    </div>
+    }
+  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
+    </div>
+  </footer>
 </div>

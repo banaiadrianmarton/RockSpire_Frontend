@@ -4,8 +4,17 @@ import { Component } from '@angular/core';
   selector: 'app-gallery',
   imports: [],
   templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.css'
+  styleUrl: './gallery.component.css',
 })
 export class GalleryComponent {
-
+  images: string[] = [
+    'minta.jpg',
+    'minta.jpg',
+    'minta.jpg',
+    'minta.jpg',
+    'minta.jpg',
+    'minta.jpg',
+    'minta.jpg',
+    'minta.jpg',
+  ];
 }
