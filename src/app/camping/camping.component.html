@@ -5,13 +5,13 @@
       <div class="camping-card" *ngFor="let spot of campingSpots">
         <h3>{{ spot.type }}</h3>
         <p class="price">{{ spot.price }} Ft / éj</p>
-        <p class="availability">Elérhető: {{ spot.availability }} hely</p>
+        <p class="availability">Elérhető: {{ spot.availability }} db</p>
 
         <div class="quantity-container">
           <button class="btn--secondary" (click)="decreaseQuantity(spot)">
             -
           </button>
-          <span>{{ spot.quantity }}</span>
+          <span>{{ spot.quantity || 0 }}</span>
           <button class="btn--secondary" (click)="increaseQuantity(spot)">
             +
           </button>

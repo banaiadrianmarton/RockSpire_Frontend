@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CampingModel } from '../models/camping.mode';
 import { CommonModule } from '@angular/common';
+import { CampingService } from '../services/camping.service';
 
 @Component({
   selector: 'app-camping',
@@ -8,36 +9,61 @@ import { CommonModule } from '@angular/common';
   templateUrl: './camping.component.html',
   styleUrl: './camping.component.css',
 })
-export class CampingComponent {
-  campingSpots: CampingModel[] = [
-    {
-      id: 1,
-      type: 'Lakókocsi hely',
-      price: 5000,
-      availability: 10,
-      quantity: 0,
-    },
-    { id: 2, type: 'Sátorhely', price: 3000, availability: 20, quantity: 0 },
-    { id: 3, type: 'Glamping', price: 10000, availability: 5, quantity: 0 },
-  ];
+export class CampingComponent implements OnInit {
+  campingSpots: CampingModel[] = [];
+
+  constructor(private campingService: CampingService) {}
+
+  ngOnInit() {
+    this.loadCampingSpots();
+  }
+
+  loadCampingSpots() {
+    this.campingService.getCampingSpots().subscribe((data) => {
+      this.campingSpots = data.map((spot) => ({
+        ...spot,
+        quantity: 0,
+      }));
+    });
+  }
 
   increaseQuantity(spot: CampingModel) {
-    if (spot.quantity < spot.availability) {
-      spot.quantity++;
+    spot.quantity = (spot.quantity || 0) + 1;
+    if (spot.quantity > spot.availability) {
+      spot.quantity = spot.availability;
     }
   }
 
   decreaseQuantity(spot: CampingModel) {
-    if (spot.quantity > 0) {
-      spot.quantity--;
+    if ((spot.quantity || 0) > 0) {
+      spot.quantity = (spot.quantity || 0) - 1;
     }
   }
 
   bookSpot(spot: CampingModel) {
-    if (spot.quantity > 0 && spot.quantity <= spot.availability) {
-      spot.availability -= spot.quantity;
-      alert(`${spot.quantity} db ${spot.type} foglalva!`);
-      spot.quantity = 0;
+    if ((spot.quantity || 0) > 0) {
+      const orderData = {
+        user_id: 1,
+        campings: [
+          {
+            camping_id: spot.id,
+            quantity: spot.quantity,
+          },
+        ],
+      };
+
+      this.campingService.bookCampingSpot(orderData).subscribe(
+        (response) => {
+          alert(
+            `Sikeresen lefoglaltál ${spot.quantity} db ${spot.type} helyet!`
+          );
+          spot.availability -= spot.quantity || 0;
+          spot.quantity = 0;
+        },
+        (error) => {
+          console.error('Foglalás hiba:', error);
+        }
+      );
     }
   }
 }

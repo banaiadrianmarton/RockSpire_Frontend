@@ -3,5 +3,5 @@ export interface CampingModel {
   type: string;
   price: number;
   availability: number;
-  quantity: number;
+  quantity?: number;
 }
