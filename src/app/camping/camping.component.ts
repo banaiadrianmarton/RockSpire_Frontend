@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CampingModel } from '../models/camping.mode';
 import { CommonModule } from '@angular/common';
 import { CampingService } from '../services/camping.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-camping',
@@ -12,7 +14,11 @@ import { CampingService } from '../services/camping.service';
 export class CampingComponent implements OnInit {
   campingSpots: CampingModel[] = [];
 
-  constructor(private campingService: CampingService) {}
+  constructor(
+    private campingService: CampingService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadCampingSpots();
@@ -42,8 +48,14 @@ export class CampingComponent implements OnInit {
 
   bookSpot(spot: CampingModel) {
     if ((spot.quantity || 0) > 0) {
+      if (!this.authService.loggedinUser) {
+        this.router.navigate(['login']);
+        alert('A foglaláshoz be kell jelentkezned!');
+        return;
+      }
+
       const orderData = {
-        user_id: 1,
+        user_id: this.authService.loggedinUser.id,
         campings: [
           {
             camping_id: spot.id,

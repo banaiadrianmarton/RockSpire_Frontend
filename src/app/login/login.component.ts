@@ -33,11 +33,6 @@ export class LoginComponent {
         if (!successful) {
           this.errorMessage = 'Hibás bejelentkezési adatok!';
         } else {
-          console.log(
-            'Bejelentkezett felhasználó:',
-            this.authService.loggedinUser
-          );
-
           if (this.authService.loggedinUser?.is_admin) {
             this.router.navigate(['admin']);
           } else {

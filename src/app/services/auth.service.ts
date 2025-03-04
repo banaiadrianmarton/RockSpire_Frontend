@@ -22,6 +22,11 @@ export class AuthService {
     }
   }
 
+  getToken(): string | null {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).token : null;
+  }
+
   login(model: { name: string; password: string }): Observable<boolean> {
     return this.http
       .post<{ user: UserModel; token: string }>(
