@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CampingModel } from '../models/camping.mode';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { CampingOrderModel } from '../models/campingorder.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,10 @@ export class CampingService {
   bookCampingSpot(orderData: any): Observable<any> {
     return this.http.post(
       'http://127.0.0.1:8000/api/camping-orders',
-      orderData
+      orderData,
+      {
+        headers: this.getHeaders(),
+      }
     );
   }
 
@@ -40,5 +44,14 @@ export class CampingService {
     return this.http.delete(`${this.apiUrl}/${id}`, {
       headers: this.getHeaders(),
     });
+  }
+
+  getUserOrders(userId: number): Observable<CampingOrderModel[]> {
+    return this.http.get<CampingOrderModel[]>(
+      `http://127.0.0.1:8000/api/camping-orders/${userId}`,
+      {
+        headers: this.getHeaders(),
+      }
+    );
   }
 }

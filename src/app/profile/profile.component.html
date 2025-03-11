@@ -2,15 +2,41 @@
   <div class="background">
     <div class="container">
       <div class="profile-info">
-        <h2>Profil</h2>
+        <h2>Profil adatok:</h2>
         <p>Név: {{ user.name }}</p>
         <p>Email: {{ user.email }}</p>
       </div>
+      <div class="orders">
+        <h3>🛒 Rendeléseid:</h3>
+        @for (order of orders; track $index) {
+        <div>
+          <div class="campings">
+            <h4>📦 Rendelés ID: {{ order.id }}</h4>
+            <div class="camping-grid">
+              <div class="camping-card" *ngFor="let camping of order.campings">
+                <p>
+                  <span class="icon">💰</span> Ár:
+                  <strong>{{ camping.price }} Ft</strong>
+                </p>
+                <p>
+                  <span class="icon">🏕️</span> Típus:
+                  <strong>{{ camping.type }}</strong>
+                </p>
+                <p>
+                  <span class="icon">🔢</span> Mennyiség:
+                  <strong>{{ camping.quantity }}</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
     </div>
   </div>
-  <footer class="footer">
-    <div class="footer-content">
-      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
-    </div>
-  </footer>
 </div>
+<footer class="footer">
+  <div class="footer-content">
+    <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
+  </div>
+</footer>
