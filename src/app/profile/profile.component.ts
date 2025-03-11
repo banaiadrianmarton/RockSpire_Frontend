@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { CampingOrderModel } from '../models/campingorder.model';
 import { CampingService } from '../services/camping.service';
+import { TicketOrderModel } from '../models/ticketorder.model';
+import { TicketService } from '../services/ticket.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +17,12 @@ import { CampingService } from '../services/camping.service';
 export class ProfileComponent implements OnInit {
   user: UserModel | null = null;
   orders: CampingOrderModel[] = [];
+  ticketOrders: TicketOrderModel[] = [];
 
   constructor(
     private authService: AuthService,
-    private campingService: CampingService
+    private campingService: CampingService,
+    private ticketService: TicketService
   ) {}
 
   ngOnInit(): void {
@@ -26,12 +30,19 @@ export class ProfileComponent implements OnInit {
 
     if (this.user?.id) {
       this.loadOrders(this.user.id);
+      this.loadTicketOrders(this.user.id);
     }
   }
 
   loadOrders(userId: number) {
     this.campingService.getUserOrders(userId).subscribe((orders) => {
       this.orders = orders;
+    });
+  }
+
+  loadTicketOrders(userId: number) {
+    this.ticketService.getUserTicketOrders(userId).subscribe((ticketOrders) => {
+      this.ticketOrders = ticketOrders;
     });
   }
 }

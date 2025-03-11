@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CampingService } from '../services/camping.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { TicketService } from '../services/ticket.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent implements OnInit {
+  activeTab: string = 'camping';
+
   campingSpots: any[] = [];
   newCamping = {
     type: '',
@@ -19,8 +22,16 @@ export class AdminComponent implements OnInit {
     availability: 0,
   };
 
+  tickets: any[] = [];
+  newTicket = {
+    type: '',
+    price: 0,
+    availability: 0,
+  };
+
   constructor(
     private campingService: CampingService,
+    private ticketService: TicketService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -28,6 +39,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.checkAdmin();
     this.loadCampingSpots();
+    this.loadTickets();
   }
 
   checkAdmin() {
@@ -42,6 +54,12 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  loadTickets() {
+    this.ticketService.getTickets().subscribe((data) => {
+      this.tickets = data;
+    });
+  }
+
   addCamping() {
     if (
       !this.newCamping.type ||
@@ -53,7 +71,7 @@ export class AdminComponent implements OnInit {
     }
 
     this.campingService.addCampingSpot(this.newCamping).subscribe(
-      (response) => {
+      () => {
         alert('Camping sikeresen hozzáadva!');
         this.loadCampingSpots();
         this.newCamping = { type: '', price: 0, availability: 0 };
@@ -72,6 +90,42 @@ export class AdminComponent implements OnInit {
         this.campingSpots = this.campingSpots.filter((spot) => spot.id !== id);
       },
       (error) => {
+        console.error('Hiba történt:', error);
+        alert('Hiba történt a törlés során.');
+      }
+    );
+  }
+
+  addTicket() {
+    if (
+      !this.newTicket.type ||
+      this.newTicket.price <= 0 ||
+      this.newTicket.availability < 0
+    ) {
+      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      return;
+    }
+
+    this.ticketService.addTicket(this.newTicket).subscribe(
+      () => {
+        alert('Jegy sikeresen hozzáadva!');
+        this.loadTickets();
+        this.newTicket = { type: '', price: 0, availability: 0 };
+      },
+      (error: any) => {
+        console.error('Hiba történt:', error);
+        alert('Hiba történt a jegy hozzáadásakor.');
+      }
+    );
+  }
+
+  deleteTicket(id: number) {
+    this.ticketService.deleteTicket(id).subscribe(
+      () => {
+        alert('Jegy sikeresen törölve!');
+        this.tickets = this.tickets.filter((ticket) => ticket.id !== id);
+      },
+      (error: any) => {
         console.error('Hiba történt:', error);
         alert('Hiba történt a törlés során.');
       }

@@ -1,34 +1,55 @@
 <div class="background">
   <div class="container">
     <div class="ticket-container">
-      <h2>Elérhető jegyek</h2>
-      <div class="ticket-card" *ngFor="let ticket of tickets">
-        <h3>{{ ticket.type }}</h3>
-        <p class="price">{{ ticket.price }} Ft</p>
-        <p class="availability">Elérhető: {{ ticket.availability }} db</p>
+      <h2>🎟️ Elérhető jegyek</h2>
 
-        <div class="quantity-container">
-          <button class="btn--secondary" (click)="decreaseQuantity(ticket)">
-            -
-          </button>
-          <span>{{ ticket.quantity }}</span>
-          <button class="btn--secondary" (click)="increaseQuantity(ticket)">
-            +
+      <div class="ticket-list" *ngIf="tickets.length > 0; else noTickets">
+        <div class="ticket-card" *ngFor="let ticket of tickets">
+          <h3>{{ ticket.type }}</h3>
+          <p class="price">{{ ticket.price }} Ft</p>
+          <p class="availability">
+            Elérhető: <strong>{{ ticket.availability }}</strong> db
+          </p>
+
+          <div class="quantity-container">
+            <button
+              class="btn--secondary"
+              (click)="decreaseQuantity(ticket)"
+              [disabled]="ticket.quantity === 0"
+            >
+              ➖
+            </button>
+            <span>{{ ticket.quantity }}</span>
+            <button
+              class="btn--secondary"
+              (click)="increaseQuantity(ticket)"
+              [disabled]="ticket.quantity >= ticket.availability"
+            >
+              ➕
+            </button>
+          </div>
+
+          <button
+            class="btn--primary"
+            (click)="buyTicket(ticket)"
+            [disabled]="ticket.quantity === 0"
+          >
+            🛒 Vásárlás
           </button>
         </div>
-        <button
-          class="btn--primary"
-          (click)="buyTicket(ticket)"
-          [disabled]="ticket.quantity === 0"
-        >
-          Vásárlás
-        </button>
       </div>
+
+      <ng-template #noTickets>
+        <p class="no-tickets">🚫 Nincs elérhető jegy</p>
+      </ng-template>
     </div>
   </div>
+
   <footer class="footer">
     <div class="footer-content">
-      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
+      <p>
+        Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit 🎶
+      </p>
     </div>
   </footer>
 </div>

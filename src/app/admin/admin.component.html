@@ -1,36 +1,86 @@
 <div class="background">
   <div class="container">
     <h1>Admin Felület</h1>
+    <div class="tabs">
+      <button
+        (click)="activeTab = 'camping'"
+        [class.active]="activeTab === 'camping'"
+      >
+        Camping
+      </button>
+      <button
+        (click)="activeTab = 'tickets'"
+        [class.active]="activeTab === 'tickets'"
+      >
+        Jegyek
+      </button>
+    </div>
 
-    <form (submit)="addCamping(); $event.preventDefault()">
-      <input
-        [(ngModel)]="newCamping.type"
-        placeholder="Camping típusa"
-        required
-        name="type"
-      />
-      <input
-        [(ngModel)]="newCamping.price"
-        type="number"
-        placeholder="Ár (Ft / éj)"
-        required
-        name="price"
-      />
-      <input
-        [(ngModel)]="newCamping.availability"
-        type="number"
-        placeholder="Elérhető helyek"
-        required
-        name="availability"
-      />
-      <button type="submit">Hozzáadás</button>
-    </form>
+    <div *ngIf="activeTab === 'camping'">
+      <form (submit)="addCamping(); $event.preventDefault()">
+        <input
+          [(ngModel)]="newCamping.type"
+          placeholder="Camping típusa"
+          required
+          name="type"
+        />
+        <input
+          [(ngModel)]="newCamping.price"
+          type="number"
+          placeholder="Ár (Ft / éj)"
+          required
+          name="price"
+        />
+        <input
+          [(ngModel)]="newCamping.availability"
+          type="number"
+          placeholder="Elérhető helyek"
+          required
+          name="availability"
+        />
+        <button type="submit">Hozzáadás</button>
+      </form>
 
-    <ul>
-      <li *ngFor="let spot of campingSpots">
-        {{ spot.type }} - {{ spot.price }} Ft / éj - {{ spot.availability }} db
-        <button (click)="deleteCamping(spot.id)">Törlés</button>
-      </li>
-    </ul>
+      <ul>
+        <li *ngFor="let spot of campingSpots">
+          {{ spot.type }} - {{ spot.price }} Ft / éj -
+          {{ spot.availability }} db
+          <button (click)="deleteCamping(spot.id)">Törlés</button>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="activeTab === 'tickets'">
+      <form (submit)="addTicket(); $event.preventDefault()">
+        <input
+          [(ngModel)]="newTicket.type"
+          placeholder="Jegy típusa"
+          required
+          name="type"
+        />
+        <input
+          [(ngModel)]="newTicket.price"
+          type="number"
+          placeholder="Ár (Ft)"
+          required
+          name="price"
+        />
+        <input
+          [(ngModel)]="newTicket.availability"
+          type="number"
+          placeholder="Elérhető jegyek"
+          required
+          name="availability"
+        />
+        <button type="submit">Hozzáadás</button>
+      </form>
+
+      <ul>
+        <li *ngFor="let ticket of tickets">
+          {{ ticket.type }} - {{ ticket.price }} Ft -
+          {{ ticket.availability }} db
+          <button (click)="deleteTicket(ticket.id)">Törlés</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
