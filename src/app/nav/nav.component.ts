@@ -17,6 +17,10 @@ export class NavComponent {
     this.router.navigate(['profile']);
   }
 
+  closeMobilMenu() {
+    this.isMenuOpen = false;
+  }
+
   logout() {
     this.authService.logout();
   }

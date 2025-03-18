@@ -1,57 +1,45 @@
 <div *ngIf="user && !user.is_admin">
   <div class="background">
     <div class="container">
-      <div class="profile-info">
-        <h2>Profil adatok:</h2>
-        <p>Név: {{ user.name }}</p>
-        <p>Email: {{ user.email }}</p>
-      </div>
-
-      <div class="orders">
-        <h3>🛒 Rendeléseid:</h3>
-        @for (order of orders; track $index) {
-        <div class="campings">
-          <h4>📦 Rendelés ID: {{ order.id }}</h4>
-          <div class="camping-grid">
-            <div class="camping-card" *ngFor="let camping of order.campings">
-              <p>
-                <span class="icon">💰</span> Ár:
-                <strong>{{ camping.price }} Ft</strong>
-              </p>
-              <p>
-                <span class="icon">🏕️</span> Típus:
-                <strong>{{ camping.type }}</strong>
-              </p>
-              <p>
-                <span class="icon">🔢</span> Mennyiség:
-                <strong>{{ camping.quantity }}</strong>
-              </p>
-            </div>
-          </div>
+      <h3>Rendeléseim</h3>
+      <div class="flex">
+        <div class="card">
+          <h2>Profil adatok:</h2>
+          <p>Név: {{ user.name }}</p>
+          <p>Email: {{ user.email }}</p>
         </div>
-        }
-        <h3>🎟️ Jegyrendeléseid:</h3>
-        @for (ticketOrder of ticketOrders; track $index) {
-        <div class="tickets">
-          <h4>🎫 Rendelés ID: {{ ticketOrder.id }}</h4>
-          <div class="ticket-grid">
-            <div class="ticket-card" *ngFor="let ticket of ticketOrder.tickets">
-              <p>
-                <span class="icon">💰</span> Ár:
-                <strong>{{ ticket.price }} Ft</strong>
-              </p>
-              <p>
-                <span class="icon">🎟️</span> Típus:
-                <strong>{{ ticket.type }}</strong>
-              </p>
-              <p>
-                <span class="icon">🔢</span> Mennyiség:
-                <strong>{{ ticket.quantity }}</strong>
-              </p>
-            </div>
-          </div>
+        <div class="orders">
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>Azonosító</th>
+                <th>Termék típusa</th>
+                <th>Mennyiség</th>
+                <th>Ár</th>
+                <th>Rendelés típusa</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of orders; track $index) {
+              <tr *ngFor="let camping of order.campings">
+                <td data-label="Azonosító">{{ order.id }}</td>
+                <td data-label="Termék típusa">{{ camping.type }}</td>
+                <td data-label="Mennyiség">{{ camping.quantity }}</td>
+                <td data-label="Ár">{{ camping.price }} Ft</td>
+                <td data-label="Rendelés típusa">Kemping</td>
+              </tr>
+              } @for (ticketOrder of ticketOrders; track $index) {
+              <tr *ngFor="let ticket of ticketOrder.tickets">
+                <td data-label="azonosító">{{ ticketOrder.id }}</td>
+                <td data-label="azonosító">{{ ticket.type }}</td>
+                <td data-label="azonosító">{{ ticket.quantity }}</td>
+                <td data-label="azonosító">{{ ticket.price }} Ft</td>
+                <td data-label="azonosító">Jegy</td>
+              </tr>
+              }
+            </tbody>
+          </table>
         </div>
-        }
       </div>
     </div>
   </div>

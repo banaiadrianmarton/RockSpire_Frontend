@@ -1,8 +1,10 @@
 <section class="background">
   <div class="container">
-    @for (image of paginatedImages; track $index ) {
-    <a (click)="navigateToProfile()"> <img [src]="image" alt="image" /></a>
-    }
+    <div class="img-wrapper">
+      @for (image of paginatedImages; track $index ) {
+      <a (click)="navigateToProfile()"> <img [src]="image" alt="image" /></a>
+      }
+    </div>
     <div class="pagination">
       <button (click)="prevPage()" [disabled]="currentPage === 0">Előző</button>
       <span>{{ currentPage + 1 }}</span>

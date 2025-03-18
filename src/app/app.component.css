@@ -2,3 +2,9 @@ app-nav {
   z-index: 2000;
   position: relative;
 }
+@media (max-width: 1000px) {
+  app-nav:has(.nav-active) {
+    position: fixed;
+    width: 100%;
+  }
+}

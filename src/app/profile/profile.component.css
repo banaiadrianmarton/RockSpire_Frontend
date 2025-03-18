@@ -1,10 +1,16 @@
 h2 {
   margin-bottom: 10px;
 }
+.flex {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
 
 .container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   margin: 5px auto;
   justify-content: center;
   gap: 15px;
@@ -12,62 +18,84 @@ h2 {
   width: 96%;
   background: rgba(0, 0, 0, 0.9);
   color: #fea71c;
-  padding: 2em;
+  padding: 1em;
   border-radius: 15px;
   border: 1px solid rgba(112, 122, 116, 0.4);
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease-in-out forwards;
 }
 
+.card {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #fea71c;
+  padding: 0.5em 1em;
+  border-radius: 15px;
+  text-align: left;
+  height: fit-content;
+  width: fit-content;
+}
+.orders {
+  flex-grow: 2;
+}
+table {
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #fea71c;
+  border-radius: 15px;
+}
+
+thead tr {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+td {
+  border-bottom: 1px solid #fea71c;
+}
+td {
+  padding: 0.5em;
+}
+@media (max-width: 768px) {
+  .card {
+    width: auto;
+  }
+  .flex {
+    flex-direction: column;
+  }
+  thead {
+    display: none;
+  }
+  tr {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+  }
+  td::before {
+    content: attr(data-label) ": ";
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+}
+
 .background {
-  height: 100vh;
-  padding-top: 1px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5px;
   background-image: url("/banner.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   z-index: -1;
   position: relative;
 }
 
-.orders {
-  display: flex;
-}
-
-.campings {
-  border: #fea71c 1px solid;
-  margin: 10px;
-  padding: 5px;
-  width: 10em;
-}
-
-.camping-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  width: 100%;
-  margin-top: 10px;
-}
-
-@media (max-width: 1024px) {
-  .camping-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .camping-container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  margin-top: auto;
   width: 100%;
   padding: 20px;
   background: rgba(0, 0, 0);

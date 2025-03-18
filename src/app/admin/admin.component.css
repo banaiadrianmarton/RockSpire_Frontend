@@ -36,33 +36,42 @@
 }
 
 .background {
-  height: 130vh;
-  padding-top: 1px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5px;
   background-image: url("/banner.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   z-index: -1;
   position: relative;
 }
+
 h2 {
   margin-bottom: 1em;
 }
 
 form {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 1em;
 }
 
 input {
+  width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #fea71c;
   background: black;
   color: white;
+}
+@media (min-width: 768px) {
+  input {
+    width: initial;
+  }
 }
 
 button {
@@ -86,6 +95,7 @@ ul {
 
 li {
   display: flex;
+  margin-block: 0.5em;
   justify-content: space-between;
   align-items: center;
   padding: 10px;

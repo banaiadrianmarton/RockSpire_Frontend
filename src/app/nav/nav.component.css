@@ -36,7 +36,7 @@ nav {
 
 .menu {
   display: flex;
-  gap: 4em;
+  gap: 1.5em;
   z-index: 1000;
 }
 
@@ -135,7 +135,7 @@ nav {
     z-index: 1000;
   }
 
-  .menu-wrapper.active {
+  .menu-wrapper.nav-active {
     opacity: 1;
     pointer-events: all;
   }

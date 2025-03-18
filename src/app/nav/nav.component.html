@@ -5,22 +5,22 @@
     <span [class.open]="isMenuOpen"></span>
   </div>
 
-  <div class="menu-wrapper" [class.active]="isMenuOpen">
+  <div class="menu-wrapper" [class.nav-active]="isMenuOpen">
     <div class="menu">
-      <a routerLink="/">Főoldal</a>
-      <a routerLink="/tickets">Jegyek</a>
-      <a routerLink="/camping">Kemping</a>
-      <a routerLink="/map">Térkép</a>
-      <a routerLink="/gallery">Galéria</a>
+      <a (click)="closeMobilMenu()" routerLink="/">Főoldal</a>
+      <a (click)="closeMobilMenu()" routerLink="/tickets">Jegyek</a>
+      <a (click)="closeMobilMenu()" routerLink="/camping">Kemping</a>
+      <a (click)="closeMobilMenu()" routerLink="/map">Térkép</a>
+      <a (click)="closeMobilMenu()" routerLink="/gallery">Galéria</a>
       @if(authService.loggedinUser?.is_admin == true){
-      <a routerLink="/admin">Admin</a>
+      <a (click)="closeMobilMenu()" routerLink="/admin">Admin</a>
       }
     </div>
     <ng-container *ngIf="authService.loggedinUser; else loginLink">
       <div class="nav-login">
         <div class="profile-icon">
           <svg
-            (click)="navigateToProfile()"
+            (click)="navigateToProfile(); closeMobilMenu()"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -38,11 +38,13 @@
           </svg>
         </div>
         <div class="divider"></div>
-        <a (click)="logout()" class="logout">Kijelentkezés</a>
+        <a (click)="logout(); closeMobilMenu()" class="logout">Kijelentkezés</a>
       </div>
     </ng-container>
     <ng-template #loginLink>
-      <a routerLink="/login" class="nav-login">Bejelentkezés</a>
+      <a (click)="closeMobilMenu()" routerLink="/login" class="nav-login"
+        >Bejelentkezés</a
+      >
     </ng-template>
   </div>
 </nav>
