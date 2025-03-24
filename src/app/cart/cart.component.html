@@ -1,22 +1,64 @@
 <div class="background">
   <div class="container">
     <div class="cart">
-      <h2>Kosár</h2>
-      <div *ngIf="cartItems.length; else emptyCart">
+      <h2>Kosaram</h2>
+      @if(cartItems.length){
+
+      <div class="cart-wrapper">
         <div *ngFor="let item of cartItems" class="cart-item">
-          <div class="flex">
+          <div class="flex-between">
             <h3>{{ item.type }}</h3>
-            <p>{{ item.quantity }} db</p>
+            <h3>{{ item.price }} Ft</h3>
           </div>
-          <p>Ár: {{ item.price }}</p>
-          <p>Összesen: {{ item.price * item.quantity }} Ft</p>
+          <p class="text-left">Lorem, ipsum dolor.</p>
+          <div class="price flex flex-between">
+            <div class="flex count">
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-minus"
+                >
+                  <path d="M5 12h14" />
+                </svg>
+              </button>
+              <p>{{ item.quantity }} db</p>
+              <button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-plus"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
+              </button>
+            </div>
+            <h3 class="">{{ item.price * item.quantity }} Ft</h3>
+          </div>
         </div>
+        <p class="flex-between bold">
+          <span>Végösszeg</span> {{ getTotalPrice() }} Ft
+        </p>
         <button class="btn--primary" (click)="checkout()">Checkout</button>
       </div>
-      <p>Végösszeg: {{ getTotalPrice() }} Ft</p>
-      <ng-template #emptyCart>
-        <p>A kosár üres.</p>
-      </ng-template>
+      }@else {
+      <p>A kosár üres.</p>
+      }
     </div>
   </div>
 </div>
