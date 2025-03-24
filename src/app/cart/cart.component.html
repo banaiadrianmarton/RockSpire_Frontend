@@ -10,11 +10,12 @@
             <h3>{{ item.type }}</h3>
             <h3>{{ item.price }} Ft</h3>
           </div>
-          <p class="text-left">Lorem, ipsum dolor.</p>
+          <p class="text-left">{{ item.description }}</p>
           <div class="price flex flex-between">
             <div class="flex count">
               <button>
                 <svg
+                  (click)="decreaseQuantity(item)"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -32,6 +33,7 @@
               <p>{{ item.quantity }} db</p>
               <button>
                 <svg
+                  (click)="increaseQuantity(item)"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"

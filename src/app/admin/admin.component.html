@@ -6,7 +6,7 @@
         (click)="activeTab = 'camping'"
         [class.active]="activeTab === 'camping'"
       >
-        Camping
+        Kemping
       </button>
       <button
         (click)="activeTab = 'tickets'"
@@ -20,9 +20,17 @@
       <form (submit)="addCamping(); $event.preventDefault()">
         <input
           [(ngModel)]="newCamping.type"
-          placeholder="Camping típusa"
+          placeholder="Kemping típusa"
+          type="text"
           required
           name="type"
+        />
+        <input
+          [(ngModel)]="newCamping.description"
+          type="text"
+          placeholder="Leírás"
+          required
+          name="description"
         />
         <input
           [(ngModel)]="newCamping.price"
@@ -43,7 +51,7 @@
 
       <ul>
         <li *ngFor="let spot of campingSpots">
-          {{ spot.type }} - {{ spot.price }} Ft / éj -
+          {{ spot.type }} - {{ spot.description }} - {{ spot.price }} Ft / éj -
           {{ spot.availability }} db
           <button (click)="deleteCamping(spot.id)">Törlés</button>
         </li>
@@ -53,9 +61,17 @@
       <form (submit)="addTicket(); $event.preventDefault()">
         <input
           [(ngModel)]="newTicket.type"
+          type="text"
           placeholder="Jegy típusa"
           required
           name="type"
+        />
+        <input
+          [(ngModel)]="newTicket.description"
+          type="text"
+          placeholder="Leírás"
+          required
+          name="description"
         />
         <input
           [(ngModel)]="newTicket.price"
@@ -76,7 +92,7 @@
 
       <ul>
         <li *ngFor="let ticket of tickets">
-          {{ ticket.type }} - {{ ticket.price }} Ft -
+          {{ ticket.type }} - {{ ticket.description }} - {{ ticket.price }} Ft -
           {{ ticket.availability }} db
           <button (click)="deleteTicket(ticket.id)">Törlés</button>
         </li>

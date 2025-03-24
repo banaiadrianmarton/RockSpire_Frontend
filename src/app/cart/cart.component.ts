@@ -35,6 +35,20 @@ export class CartComponent implements OnInit {
     );
   }
 
+  increaseQuantity(item: CartItem): void {
+    item.quantity++;
+    this.cartService.updateItem(item);
+  }
+
+  decreaseQuantity(item: CartItem): void {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.cartService.updateItem(item);
+    } else {
+      this.cartService.removeItem(item);
+    }
+  }
+
   checkout(): void {
     if (this.cartItems.length === 0) {
       alert('A kosár üres!');

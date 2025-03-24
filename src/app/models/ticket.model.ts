@@ -5,5 +5,6 @@ export interface TicketModel extends CartItem {
   type: string;
   price: number;
   availability: number;
+  description: string;
   quantity: number;
 }

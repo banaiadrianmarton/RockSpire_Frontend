@@ -16,6 +16,7 @@
                 <th>Termék típusa</th>
                 <th>Mennyiség</th>
                 <th>Ár</th>
+                <th>Leírás</th>
                 <th>Rendelés típusa</th>
               </tr>
             </thead>
@@ -28,17 +29,19 @@
                 <td data-label="Ár">
                   {{ (camping?.quantity ?? 0) * (camping?.price ?? 0) }} Ft
                 </td>
+                <td data-label="Leírás">{{ camping.description }}</td>
                 <td data-label="Rendelés típusa">Kemping</td>
               </tr>
               } @for (ticketOrder of ticketOrders; track $index) {
               <tr *ngFor="let ticket of ticketOrder.tickets">
-                <td data-label="azonosító">{{ ticketOrder.id }}</td>
-                <td data-label="azonosító">{{ ticket.type }}</td>
-                <td data-label="azonosító">{{ ticket.quantity }}</td>
-                <td data-label="azonosító">
+                <td data-label="Azonosító">{{ ticketOrder.id }}</td>
+                <td data-label="Termék típusa">{{ ticket.type }}</td>
+                <td data-label="Mennyiség">{{ ticket.quantity }}</td>
+                <td data-label="Ár">
                   {{ (ticket?.quantity ?? 0) * (ticket?.price ?? 0) }} Ft
                 </td>
-                <td data-label="azonosító">Jegy</td>
+                <td data-label="Leírás">{{ ticket.description }}</td>
+                <td data-label="Rendelés típusa">Jegy</td>
               </tr>
               }
             </tbody>

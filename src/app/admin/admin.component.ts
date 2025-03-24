@@ -19,6 +19,7 @@ export class AdminComponent implements OnInit {
   newCamping = {
     type: '',
     price: 0,
+    description: '',
     availability: 0,
   };
 
@@ -26,6 +27,7 @@ export class AdminComponent implements OnInit {
   newTicket = {
     type: '',
     price: 0,
+    description: '',
     availability: 0,
   };
 
@@ -74,7 +76,12 @@ export class AdminComponent implements OnInit {
       () => {
         alert('Camping sikeresen hozzáadva!');
         this.loadCampingSpots();
-        this.newCamping = { type: '', price: 0, availability: 0 };
+        this.newCamping = {
+          type: '',
+          price: 0,
+          description: '',
+          availability: 0,
+        };
       },
       (error) => {
         console.error('Hiba történt:', error);
@@ -110,7 +117,12 @@ export class AdminComponent implements OnInit {
       () => {
         alert('Jegy sikeresen hozzáadva!');
         this.loadTickets();
-        this.newTicket = { type: '', price: 0, availability: 0 };
+        this.newTicket = {
+          type: '',
+          price: 0,
+          description: '',
+          availability: 0,
+        };
       },
       (error: any) => {
         console.error('Hiba történt:', error);

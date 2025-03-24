@@ -50,6 +50,27 @@ export class CartService {
     this.updateCartItems();
   }
 
+  updateItem(item: CartItem): void {
+    const cart = this.getCartItems();
+    const index = cart.findIndex(
+      (i) => i.id === item.id && i.type === item.type
+    );
+    if (index !== -1) {
+      cart[index] = item;
+      localStorage.setItem(this.storageKey, JSON.stringify(cart));
+      this.updateCartItems();
+    }
+  }
+
+  removeItem(item: CartItem): void {
+    const cart = this.getCartItems();
+    const updatedCart = cart.filter(
+      (i) => !(i.id === item.id && i.type === item.type)
+    );
+    localStorage.setItem(this.storageKey, JSON.stringify(updatedCart));
+    this.updateCartItems();
+  }
+
   clearTicketCart(): void {
     const cart = this.getCartItems();
     const updatedCart = cart.filter((item) => item.cartCategory !== 'ticket');
