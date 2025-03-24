@@ -25,7 +25,15 @@
   border-radius: 15px;
 }
 
-img {
+.logo {
+  width: 300px;
+  height: 250px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-inline: auto;
+}
+
+.bandlogo-img {
   width: 100%;
   background: rgb(254, 167, 28, 0.5);
   border-radius: 15px;

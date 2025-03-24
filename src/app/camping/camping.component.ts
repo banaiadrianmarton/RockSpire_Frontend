@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CampingService } from '../services/camping.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-camping',
@@ -17,7 +18,8 @@ export class CampingComponent implements OnInit {
   constructor(
     private campingService: CampingService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -43,6 +45,21 @@ export class CampingComponent implements OnInit {
   decreaseQuantity(spot: CampingModel) {
     if ((spot.quantity || 0) > 0) {
       spot.quantity = (spot.quantity || 0) - 1;
+    }
+  }
+
+  addToCart(spot: CampingModel): void {
+    if (spot.quantity > 0) {
+      if (!this.authService.loggedinUser) {
+        this.router.navigate(['login']);
+        alert('A foglaláshoz be kell jelentkezned!');
+        return;
+      }
+      this.cartService.addToCart({ ...spot, cartCategory: 'camping' });
+      alert(
+        `${spot.quantity} db ${spot.type} camping hely hozzáadva a kosárhoz!`
+      );
+      spot.quantity = 0;
     }
   }
 

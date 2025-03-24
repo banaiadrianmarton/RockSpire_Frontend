@@ -9,6 +9,8 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { authGuard } from './misc/auth.guard';
+import { BandDetailsComponent } from './band-details/band-details.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,5 +23,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
+  { path: 'bandDetails', component: BandDetailsComponent },
+  { path: 'cart', component: CartComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

@@ -25,7 +25,9 @@
                 <td data-label="Azonosító">{{ order.id }}</td>
                 <td data-label="Termék típusa">{{ camping.type }}</td>
                 <td data-label="Mennyiség">{{ camping.quantity }}</td>
-                <td data-label="Ár">{{ camping.price }} Ft</td>
+                <td data-label="Ár">
+                  {{ (camping?.quantity ?? 0) * (camping?.price ?? 0) }} Ft
+                </td>
                 <td data-label="Rendelés típusa">Kemping</td>
               </tr>
               } @for (ticketOrder of ticketOrders; track $index) {
@@ -33,7 +35,9 @@
                 <td data-label="azonosító">{{ ticketOrder.id }}</td>
                 <td data-label="azonosító">{{ ticket.type }}</td>
                 <td data-label="azonosító">{{ ticket.quantity }}</td>
-                <td data-label="azonosító">{{ ticket.price }} Ft</td>
+                <td data-label="azonosító">
+                  {{ (ticket?.quantity ?? 0) * (ticket?.price ?? 0) }} Ft
+                </td>
                 <td data-label="azonosító">Jegy</td>
               </tr>
               }

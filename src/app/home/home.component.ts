@@ -30,7 +30,7 @@ export class HomeComponent {
   ];
 
   navigateToProfile() {
-    this.router.navigate(['profile']);
+    this.router.navigate(['bandDetails']);
   }
 
   pageSize = 9;

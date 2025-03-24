@@ -1,0 +1,22 @@
+<div class="background">
+  <div class="container">
+    <div class="cart">
+      <h2>Kosár</h2>
+      <div *ngIf="cartItems.length; else emptyCart">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          <div class="flex">
+            <h3>{{ item.type }}</h3>
+            <p>{{ item.quantity }} db</p>
+          </div>
+          <p>Ár: {{ item.price }}</p>
+          <p>Összesen: {{ item.price * item.quantity }} Ft</p>
+        </div>
+        <button class="btn--primary" (click)="checkout()">Checkout</button>
+      </div>
+      <p>Végösszeg: {{ getTotalPrice() }} Ft</p>
+      <ng-template #emptyCart>
+        <p>A kosár üres.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

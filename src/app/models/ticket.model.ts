@@ -1,4 +1,6 @@
-export interface TicketModel {
+import { CartItem } from './cart.model';
+
+export interface TicketModel extends CartItem {
   id: number;
   type: string;
   price: number;

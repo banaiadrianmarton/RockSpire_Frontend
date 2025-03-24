@@ -16,6 +16,33 @@ nav {
   }
 }
 
+.cart-badge {
+  position: absolute;
+  right: -17px;
+  top: 15px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-icon-background {
+  background: #fea71c;
+  display: flex;
+  cursor: pointer;
+  gap: 1em;
+  padding: 0.3em 0.8em;
+  border-radius: 5px;
+  font-weight: bold;
+  left: 0;
+}
+
 .logout {
   color: black !important;
   &:hover {
@@ -46,6 +73,7 @@ nav {
 }
 
 .profile-icon {
+  position: relative;
   &:hover {
     scale: 0.95;
     color: white !important;

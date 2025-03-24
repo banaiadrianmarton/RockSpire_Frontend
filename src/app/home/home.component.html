@@ -1,8 +1,11 @@
 <section class="background">
   <div class="container">
+    <img src="Logo.webp" alt="" class="logo" />
     <div class="img-wrapper">
       @for (image of paginatedImages; track $index ) {
-      <a (click)="navigateToProfile()"> <img [src]="image" alt="image" /></a>
+      <a (click)="navigateToProfile()">
+        <img [src]="image" alt="image" class="bandlogo-img"
+      /></a>
       }
     </div>
     <div class="pagination">

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TicketModel } from '../models/ticket.model';
 import { TicketService } from '../services/ticket.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-tickets',
@@ -13,14 +14,17 @@ import { TicketService } from '../services/ticket.service';
 export class TicketsComponent {
   tickets: TicketModel[] = [];
 
-  constructor(private ticketService: TicketService) {}
+  constructor(
+    private ticketService: TicketService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.ticketService.getTickets().subscribe({
       next: (data) => {
         this.tickets = data.map((ticket) => ({
           ...ticket,
-          quantity: 0, // Új mező az aktuális vásárlási mennyiséghez
+          quantity: 0,
         }));
       },
       error: (err) => console.error('Hiba a jegyek betöltésekor:', err),
@@ -36,6 +40,14 @@ export class TicketsComponent {
   decreaseQuantity(ticket: TicketModel): void {
     if (ticket.quantity > 0) {
       ticket.quantity--;
+    }
+  }
+
+  addToCart(ticket: TicketModel): void {
+    if (ticket.quantity > 0) {
+      this.cartService.addToCart({ ...ticket, cartCategory: 'ticket' });
+      alert(`${ticket.quantity} db ${ticket.type} jegy hozzáadva a kosárhoz!`);
+      ticket.quantity = 0;
     }
   }
 
