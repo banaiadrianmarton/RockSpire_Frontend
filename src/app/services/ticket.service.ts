@@ -32,7 +32,7 @@ export class TicketService {
   }
 
   updateTicket(id: number, ticketData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, ticketData, {
+    return this.http.patch(`${this.apiUrl}/${id}`, ticketData, {
       headers: this.getHeaders(),
     });
   }

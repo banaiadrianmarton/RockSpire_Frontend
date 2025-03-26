@@ -8,6 +8,9 @@
         <p class="availability">
           Elérhető: <strong>{{ ticket.availability }}</strong> db
         </p>
+        <div *ngIf="ticket.days && ticket.days.length">
+          <li *ngFor="let day of ticket.days">Dátum: {{ day.date }}</li>
+        </div>
 
         <div class="quantity-container">
           <button

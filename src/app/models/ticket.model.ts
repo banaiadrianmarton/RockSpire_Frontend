@@ -6,5 +6,6 @@ export interface TicketModel extends CartItem {
   price: number;
   availability: number;
   description: string;
+  days: { id: number; date: string }[];
   quantity: number;
 }

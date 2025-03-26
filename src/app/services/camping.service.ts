@@ -54,4 +54,10 @@ export class CampingService {
       }
     );
   }
+
+  updateCampingSpot(id: number, campingData: any): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${id}`, campingData, {
+      headers: this.getHeaders(),
+    });
+  }
 }

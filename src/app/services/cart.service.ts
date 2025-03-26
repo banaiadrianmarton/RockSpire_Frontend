@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TicketModel } from '../models/ticket.model';
 import { BehaviorSubject } from 'rxjs';
-import { CampingModel } from '../models/camping.mode';
 import { CartItem } from '../models/cart.model';
 
 @Injectable({

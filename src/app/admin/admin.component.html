@@ -53,7 +53,10 @@
         <li *ngFor="let spot of campingSpots">
           {{ spot.type }} - {{ spot.description }} - {{ spot.price }} Ft / éj -
           {{ spot.availability }} db
-          <button (click)="deleteCamping(spot.id)">Törlés</button>
+          <div class="button-holder">
+            <button (click)="deleteCamping(spot.id)">Törlés</button>
+            <button (click)="openEditCampingModal(spot)">Szerkesztés</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -94,9 +97,86 @@
         <li *ngFor="let ticket of tickets">
           {{ ticket.type }} - {{ ticket.description }} - {{ ticket.price }} Ft -
           {{ ticket.availability }} db
-          <button (click)="deleteTicket(ticket.id)">Törlés</button>
+          <div class="button-holder">
+            <button (click)="deleteTicket(ticket.id)">Törlés</button>
+            <button (click)="openEditTicketModal(ticket)">Szerkesztés</button>
+          </div>
         </li>
       </ul>
+    </div>
+    <div class="modal" *ngIf="editTicketModalOpen">
+      <div class="modal-content">
+        <span class="close" (click)="closeEditTicketModal()">&times;</span>
+        <h2>Jegy szerkesztése</h2>
+        <form (submit)="updateTicket(); $event.preventDefault()">
+          <input
+            [(ngModel)]="editingTicket.type"
+            placeholder="Jegy típusa"
+            type="text"
+            required
+            name="editType"
+          />
+          <input
+            [(ngModel)]="editingTicket.description"
+            type="text"
+            placeholder="Leírás"
+            required
+            name="editDescription"
+          />
+          <input
+            [(ngModel)]="editingTicket.price"
+            type="number"
+            placeholder="Ár (Ft)"
+            required
+            name="editPrice"
+          />
+          <input
+            [(ngModel)]="editingTicket.availability"
+            type="number"
+            placeholder="Elérhető jegyek"
+            required
+            name="editAvailability"
+          />
+          <button type="submit">Mentés</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" *ngIf="editCampingModalOpen">
+      <div class="modal-content">
+        <span class="close" (click)="closeEditCampingModal()">&times;</span>
+        <h2>Kemping szerkesztése</h2>
+        <form (submit)="updateCamping(); $event.preventDefault()">
+          <input
+            [(ngModel)]="editingCamping.type"
+            placeholder="Kemping típusa"
+            type="text"
+            required
+            name="editType"
+          />
+          <input
+            [(ngModel)]="editingCamping.description"
+            type="text"
+            placeholder="Leírás"
+            required
+            name="editDescription"
+          />
+          <input
+            [(ngModel)]="editingCamping.price"
+            type="number"
+            placeholder="Ár (Ft / éj)"
+            required
+            name="editPrice"
+          />
+          <input
+            [(ngModel)]="editingCamping.availability"
+            type="number"
+            placeholder="Elérhető helyek"
+            required
+            name="editAvailability"
+          />
+          <button type="submit">Mentés</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

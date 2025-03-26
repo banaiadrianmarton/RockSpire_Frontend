@@ -31,6 +31,25 @@ export class AdminComponent implements OnInit {
     availability: 0,
   };
 
+  editCampingModalOpen: boolean = false;
+  editTicketModalOpen: boolean = false;
+
+  editingCamping: any = {
+    id: null,
+    type: '',
+    price: 0,
+    description: '',
+    availability: 0,
+  };
+
+  editingTicket: any = {
+    id: null,
+    type: '',
+    price: 0,
+    description: '',
+    availability: 0,
+  };
+
   constructor(
     private campingService: CampingService,
     private ticketService: TicketService,
@@ -42,6 +61,38 @@ export class AdminComponent implements OnInit {
     this.checkAdmin();
     this.loadCampingSpots();
     this.loadTickets();
+  }
+
+  openEditCampingModal(spot: any) {
+    this.editingCamping = { ...spot };
+    this.editCampingModalOpen = true;
+  }
+
+  openEditTicketModal(ticket: any) {
+    this.editingTicket = { ...ticket };
+    this.editTicketModalOpen = true;
+  }
+
+  closeEditCampingModal() {
+    this.editCampingModalOpen = false;
+    this.editingCamping = {
+      id: null,
+      type: '',
+      price: 0,
+      description: '',
+      availability: 0,
+    };
+  }
+
+  closeEditTicketModal() {
+    this.editTicketModalOpen = false;
+    this.editingTicket = {
+      id: null,
+      type: '',
+      price: 0,
+      description: '',
+      availability: 0,
+    };
   }
 
   checkAdmin() {
@@ -142,5 +193,55 @@ export class AdminComponent implements OnInit {
         alert('Hiba történt a törlés során.');
       }
     );
+  }
+
+  updateTicket() {
+    if (
+      !this.editingTicket.type ||
+      this.editingTicket.price <= 0 ||
+      this.editingTicket.availability < 0
+    ) {
+      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      return;
+    }
+
+    this.ticketService
+      .updateTicket(this.editingTicket.id, this.editingTicket)
+      .subscribe(
+        (response) => {
+          alert('Jegy sikeresen módosítva!');
+          this.loadTickets();
+          this.closeEditTicketModal();
+        },
+        (error) => {
+          console.error('Hiba történt a módosítás során:', error);
+          alert('Hiba történt a módosítás során.');
+        }
+      );
+  }
+
+  updateCamping() {
+    if (
+      !this.editingCamping.type ||
+      this.editingCamping.price <= 0 ||
+      this.editingCamping.availability < 0
+    ) {
+      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      return;
+    }
+
+    this.campingService
+      .updateCampingSpot(this.editingCamping.id, this.editingCamping)
+      .subscribe(
+        (response) => {
+          alert('Camping sikeresen módosítva!');
+          this.loadCampingSpots();
+          this.closeEditCampingModal();
+        },
+        (error) => {
+          console.error('Hiba történt a módosítás során:', error);
+          alert('Hiba történt a módosítás során.');
+        }
+      );
   }
 }
