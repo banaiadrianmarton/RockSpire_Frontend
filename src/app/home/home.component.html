@@ -1,18 +1,37 @@
 <section class="background">
   <div class="container">
+    <input
+      type="text"
+      placeholder="Keress a felépő bandák között..."
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="currentPage = 0"
+    />
+    <input
+      type="date"
+      [(ngModel)]="searchDate"
+      (ngModelChange)="currentPage = 0"
+    />
     <div class="img-wrapper">
-      @for (image of paginatedImages; track $index ) {
-      <a (click)="navigateToProfile()">
-        <img [src]="image" alt="image" class="bandlogo-img"
-      /></a>
-      }
+      <div *ngFor="let band of paginatedBands; let i = index">
+        <a (click)="navigateToProfile(band.id)">
+          <img
+            [src]="band.logo_url"
+            alt="{{ band.name }}"
+            class="bandlogo-img logo"
+          />
+        </a>
+        <h1>{{ band.name }}</h1>
+        <p>{{ band.description }}</p>
+        <p>{{ band.days?.date }}</p>
+        <p></p>
+      </div>
     </div>
     <div class="pagination">
       <button (click)="prevPage()" [disabled]="currentPage === 0">Előző</button>
       <span>{{ currentPage + 1 }}</span>
       <button
         (click)="nextPage()"
-        [disabled]="(currentPage + 1) * pageSize >= images.length"
+        [disabled]="(currentPage + 1) * pageSize >= bands.length"
       >
         Következő
       </button>

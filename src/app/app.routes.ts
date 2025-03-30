@@ -23,7 +23,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
-  { path: 'bandDetails', component: BandDetailsComponent },
+  { path: 'bandDetails/:id', component: BandDetailsComponent },
   { path: 'cart', component: CartComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

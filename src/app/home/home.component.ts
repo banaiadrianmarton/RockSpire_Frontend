@@ -1,55 +1,72 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
+import { BandModel } from '../models/band.model';
+import { BandService } from '../services/band.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
-  constructor(private router: Router) {}
-
-  images: string[] = [
-    'band_logos/Babymetal-Logo.png',
-    'band_logos/Pantera-Logo.png',
-    'band_logos/Judas-Priest-Logo.png',
-    'band_logos/Gojira-Logo.png',
-    'band_logos/Ghost-Logo.png',
-    'band_logos/System-of-a-Down-Logo.png',
-    'band_logos/Korn-Logo.png',
-    'band_logos/Trivium-Logo.png',
-    'band_logos/Black-Sabbath-Logo.png',
-    'band_logos/Iron-Maiden-Logo.png',
-    'band_logos/Slayer-Logo.png',
-    'band_logos/Kiss-Logo.png',
-    'band_logos/Metallica-Logo.png',
-    'band_logos/Rammstein-Logo.png',
-    'band_logos/Ozzy-Osbourne-Logo.png',
-  ];
-
-  navigateToProfile() {
-    this.router.navigate(['bandDetails']);
-  }
-
+export class HomeComponent implements OnInit {
+  bands: BandModel[] = [];
   pageSize = 9;
   currentPage = 0;
+  searchQuery: string = '';
+  searchDate: string = '';
 
-  get paginatedImages(): string[] {
-    const start = this.currentPage * this.pageSize;
-    return this.images.slice(start, start + this.pageSize);
+  constructor(private router: Router, private bandService: BandService) {}
+
+  ngOnInit(): void {
+    this.loadBands();
   }
 
-  nextPage() {
-    if ((this.currentPage + 1) * this.pageSize < this.images.length) {
+  loadBands(): void {
+    this.bandService.getBands().subscribe(
+      (data: BandModel[]) => {
+        this.bands = data;
+      },
+      (error) => {
+        console.error('Hiba az adatok lekérésekor:', error);
+      }
+    );
+  }
+
+  get filteredBands(): BandModel[] {
+    return this.bands.filter((band) => {
+      const nameMatch = band.name
+        .toLowerCase()
+        .includes(this.searchQuery.toLowerCase());
+
+      const dateMatch = this.searchDate
+        ? band.days?.date === this.searchDate
+        : true;
+
+      return nameMatch && dateMatch;
+    });
+  }
+
+  get paginatedBands(): BandModel[] {
+    const start = this.currentPage * this.pageSize;
+    return this.filteredBands.slice(start, start + this.pageSize);
+  }
+
+  nextPage(): void {
+    if ((this.currentPage + 1) * this.pageSize < this.bands.length) {
       this.currentPage++;
     }
   }
 
-  prevPage() {
+  prevPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
     }
+  }
+
+  navigateToProfile(bandId: number): void {
+    this.router.navigate(['bandDetails', bandId]);
   }
 }

@@ -1,3 +1,12 @@
 <div class="background">
-  <div class="container"></div>
+  <div class="container">
+    @if(band){
+    <img [src]="band.image_url" alt="{{ band.name }}" class="bandlogo-img" />
+    <h1>{{ band.name }}</h1>
+    <p>{{ band.description }}</p>
+    <p>{{ band.days?.date }}</p>
+    } @else {
+    <p>Hiba a banda betöltésekor...</p>
+    }
+  </div>
 </div>
