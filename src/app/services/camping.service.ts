@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CampingModel } from '../models/camping.mode';
+import { CampingModel } from '../models/camping.model';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { CampingOrderModel } from '../models/campingorder.model';

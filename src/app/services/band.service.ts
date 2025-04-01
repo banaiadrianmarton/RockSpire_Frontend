@@ -26,4 +26,16 @@ export class BandService {
   getBand(id: number): Observable<BandModel> {
     return this.http.get<BandModel>(`${this.apiUrl}/${id}`);
   }
+
+  createBand(bandData: BandModel): Observable<any> {
+    return this.http.post(this.apiUrl, bandData, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  deleteBand(id: number | undefined): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {
+      headers: this.getHeaders(),
+    });
+  }
 }

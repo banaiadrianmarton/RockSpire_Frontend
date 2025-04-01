@@ -1,7 +1,7 @@
 import { DayModel } from './day.model';
 
 export interface BandModel {
-  id: number;
+  id?: number;
   name: string;
   image_url: string;
   logo_url: string;

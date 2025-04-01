@@ -1,4 +1,4 @@
-import { CampingModel } from './camping.mode';
+import { CampingModel } from './camping.model';
 
 export interface CampingOrderModel {
   id: number;

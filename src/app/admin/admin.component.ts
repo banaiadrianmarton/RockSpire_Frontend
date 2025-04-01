@@ -5,6 +5,8 @@ import { CampingService } from '../services/camping.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TicketService } from '../services/ticket.service';
+import { BandModel } from '../models/band.model';
+import { BandService } from '../services/band.service';
 
 @Component({
   selector: 'app-admin',
@@ -31,6 +33,15 @@ export class AdminComponent implements OnInit {
     availability: 0,
   };
 
+  bands: BandModel[] = [];
+  newBand: BandModel = {
+    name: '',
+    image_url: '',
+    logo_url: '',
+    description: '',
+    day_id: 1,
+  };
+
   editCampingModalOpen: boolean = false;
   editTicketModalOpen: boolean = false;
 
@@ -53,6 +64,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private campingService: CampingService,
     private ticketService: TicketService,
+    private bandService: BandService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -61,6 +73,7 @@ export class AdminComponent implements OnInit {
     this.checkAdmin();
     this.loadCampingSpots();
     this.loadTickets();
+    this.loadBands();
   }
 
   openEditCampingModal(spot: any) {
@@ -243,5 +256,42 @@ export class AdminComponent implements OnInit {
           alert('Hiba történt a módosítás során.');
         }
       );
+  }
+
+  loadBands() {
+    this.bandService.getBands().subscribe((data: BandModel[]) => {
+      this.bands = data;
+    });
+  }
+
+  addBand(): void {
+    this.bandService.createBand(this.newBand).subscribe({
+      next: (response) => {
+        console.log('Sikeres mentés:', response);
+        this.newBand = {
+          name: '',
+          image_url: '',
+          logo_url: '',
+          description: '',
+          day_id: 1,
+        };
+      },
+      error: (error) => {
+        console.error('Hiba történt:', error);
+      },
+    });
+  }
+
+  deleteBand(id: number | undefined) {
+    this.bandService.deleteBand(id).subscribe(
+      () => {
+        alert('Zenekar sikeresen törölve!');
+        this.bands = this.bands.filter((band) => band.id !== id);
+      },
+      (error) => {
+        console.error('Hiba történt:', error);
+        alert('Hiba történt a törlés során.');
+      }
+    );
   }
 }

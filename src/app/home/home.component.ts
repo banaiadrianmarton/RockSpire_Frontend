@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   currentPage = 0;
   searchQuery: string = '';
   searchDate: string = '';
+  availableDates: string[] = [];
 
   constructor(private router: Router, private bandService: BandService) {}
 
@@ -28,11 +29,22 @@ export class HomeComponent implements OnInit {
     this.bandService.getBands().subscribe(
       (data: BandModel[]) => {
         this.bands = data;
+        this.extractAvailableDates();
       },
       (error) => {
         console.error('Hiba az adatok lekérésekor:', error);
       }
     );
+  }
+
+  extractAvailableDates(): void {
+    this.availableDates = [
+      ...new Set(
+        this.bands
+          .map((band) => band.days?.date)
+          .filter((date): date is string => date !== undefined)
+      ),
+    ];
   }
 
   get filteredBands(): BandModel[] {
@@ -66,7 +78,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  navigateToProfile(bandId: number): void {
+  navigateToProfile(bandId: number | undefined): void {
     this.router.navigate(['bandDetails', bandId]);
   }
 }

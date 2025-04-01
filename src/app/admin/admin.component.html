@@ -14,6 +14,61 @@
       >
         Jegyek
       </button>
+      <button
+        (click)="activeTab = 'bands'"
+        [class.active]="activeTab === 'bands'"
+      >
+        Zenekarok
+      </button>
+    </div>
+
+    <div *ngIf="activeTab === 'bands'">
+      <form (submit)="addBand(); $event.preventDefault()">
+        <input
+          type="text"
+          [(ngModel)]="newBand.name"
+          placeholder="Zenekar neve"
+          required
+          name="bandName"
+        />
+        <input
+          type="text"
+          [(ngModel)]="newBand.logo_url"
+          placeholder="Logo URL"
+          required
+          name="bandLogo"
+        />
+        <input
+          type="text"
+          [(ngModel)]="newBand.image_url"
+          placeholder="Kép URL"
+          name="bandImage"
+        />
+        <input
+          type="text"
+          [(ngModel)]="newBand.description"
+          placeholder="Leírás"
+          required
+          name="description"
+        />
+        <input
+          type="number"
+          [(ngModel)]="newBand.day_id"
+          placeholder="Nap ID"
+          required
+          name="bandDayId"
+        />
+        <button type="submit">Hozzáadás</button>
+      </form>
+
+      <ul>
+        <li *ngFor="let band of bands">
+          {{ band.name }} - {{ band.description }} - Nap ID: {{ band.day_id }}
+          <div class="button-holder">
+            <button (click)="deleteBand(band.id)">Törlés</button>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <div *ngIf="activeTab === 'camping'">

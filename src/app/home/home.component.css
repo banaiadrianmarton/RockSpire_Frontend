@@ -117,6 +117,16 @@ input {
   color: #fea71c;
 }
 
+select {
+  margin-top: 1em;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fea71c;
+  background: black;
+  color: #fea71c;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }

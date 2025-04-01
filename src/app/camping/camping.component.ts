@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CampingModel } from '../models/camping.mode';
+import { CampingModel } from '../models/camping.model';
 import { CommonModule } from '@angular/common';
 import { CampingService } from '../services/camping.service';
 import { AuthService } from '../services/auth.service';

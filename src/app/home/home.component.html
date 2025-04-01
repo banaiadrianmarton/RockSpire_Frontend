@@ -6,11 +6,12 @@
       [(ngModel)]="searchQuery"
       (ngModelChange)="currentPage = 0"
     />
-    <input
-      type="date"
-      [(ngModel)]="searchDate"
-      (ngModelChange)="currentPage = 0"
-    />
+    <select [(ngModel)]="searchDate" (ngModelChange)="currentPage = 0">
+      <option value="">Összes dátum</option>
+      <option *ngFor="let date of availableDates" [value]="date">
+        {{ date }}
+      </option>
+    </select>
     <div class="img-wrapper">
       <div *ngFor="let band of paginatedBands; let i = index">
         <a (click)="navigateToProfile(band.id)">
@@ -20,9 +21,6 @@
             class="bandlogo-img logo"
           />
         </a>
-        <h1>{{ band.name }}</h1>
-        <p>{{ band.description }}</p>
-        <p>{{ band.days?.date }}</p>
         <p></p>
       </div>
     </div>
