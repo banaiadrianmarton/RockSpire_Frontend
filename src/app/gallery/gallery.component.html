@@ -1,14 +1,22 @@
 <div class="background">
   <div class="container">
     @for (image of images; track $index) {
-    <div class="image-wrapper">
-      <img [src]="image" alt="Gallery Image" />
+    <div class="image-wrapper" (click)="openModal(image)">
+      <img [src]="image" alt="RockSpire Galléria Képek" />
     </div>
     }
   </div>
+
   <footer class="footer">
     <div class="footer-content">
       <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
     </div>
   </footer>
+</div>
+
+<div class="modal" *ngIf="selectedImage" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <img [src]="selectedImage" alt="Kép nagyobb méretben" class="modal-image" />
+    <span class="close" (click)="closeModal()">&times;</span>
+  </div>
 </div>
