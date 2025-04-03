@@ -33,6 +33,12 @@ export class BandService {
     });
   }
 
+  updateBand(id: number, bandData: any): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${id}`, bandData, {
+      headers: this.getHeaders(),
+    });
+  }
+
   deleteBand(id: number | undefined): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, {
       headers: this.getHeaders(),

@@ -66,6 +66,7 @@
           {{ band.name }} - {{ band.description }} - Nap ID: {{ band.day_id }}
           <div class="button-holder">
             <button (click)="deleteBand(band.id)">Törlés</button>
+            <button (click)="openEditBandModal(band)">Szerkesztés</button>
           </div>
         </li>
       </ul>
@@ -145,13 +146,22 @@
           required
           name="availability"
         />
+        <input
+          [(ngModel)]="newTicket.day_id"
+          type="number"
+          placeholder="Nap ID"
+          required
+          name="day_id"
+        />
         <button type="submit">Hozzáadás</button>
       </form>
 
       <ul>
         <li *ngFor="let ticket of tickets">
           {{ ticket.type }} - {{ ticket.description }} - {{ ticket.price }} Ft -
-          {{ ticket.availability }} db
+          {{ ticket.availability }} db @for (day of ticket.days; track $index) {
+          Dátum: {{ day.date }}
+          }
           <div class="button-holder">
             <button (click)="deleteTicket(ticket.id)">Törlés</button>
             <button (click)="openEditTicketModal(ticket)">Szerkesztés</button>
@@ -192,6 +202,13 @@
             required
             name="editAvailability"
           />
+          <input
+            [(ngModel)]="editingTicket.day_id"
+            type="number"
+            placeholder="Nap ID"
+            required
+            name="editDayId"
+          />
           <button type="submit">Mentés</button>
         </form>
       </div>
@@ -228,6 +245,49 @@
             placeholder="Elérhető helyek"
             required
             name="editAvailability"
+          />
+          <button type="submit">Mentés</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" *ngIf="editBandModalOpen">
+      <div class="modal-content">
+        <span class="close" (click)="closeEditBandModal()">×</span>
+        <h2>Zenekar szerkesztése</h2>
+        <form (submit)="updateBand(); $event.preventDefault()">
+          <input
+            [(ngModel)]="editingBand.name"
+            placeholder="Zenekar neve"
+            type="text"
+            required
+            name="editBandName"
+          />
+          <input
+            [(ngModel)]="editingBand.logo_url"
+            placeholder="Logo URL"
+            type="text"
+            required
+            name="editBandLogo"
+          />
+          <input
+            [(ngModel)]="editingBand.image_url"
+            placeholder="Kép URL"
+            type="text"
+            name="editBandImage"
+          />
+          <input
+            [(ngModel)]="editingBand.description"
+            placeholder="Leírás"
+            type="text"
+            required
+            name="editBandDescription"
+          />
+          <input
+            [(ngModel)]="editingBand.day_id"
+            placeholder="Nap ID"
+            type="number"
+            required
+            name="editBandDayId"
           />
           <button type="submit">Mentés</button>
         </form>

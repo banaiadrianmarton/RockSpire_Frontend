@@ -31,6 +31,7 @@ export class AdminComponent implements OnInit {
     price: 0,
     description: '',
     availability: 0,
+    day_id: null,
   };
 
   bands: BandModel[] = [];
@@ -44,6 +45,7 @@ export class AdminComponent implements OnInit {
 
   editCampingModalOpen: boolean = false;
   editTicketModalOpen: boolean = false;
+  editBandModalOpen: boolean = false;
 
   editingCamping: any = {
     id: null,
@@ -59,6 +61,15 @@ export class AdminComponent implements OnInit {
     price: 0,
     description: '',
     availability: 0,
+  };
+
+  editingBand: any = {
+    id: null,
+    name: '',
+    image_url: '',
+    logo_url: '',
+    description: '',
+    day_id: 1,
   };
 
   constructor(
@@ -84,6 +95,23 @@ export class AdminComponent implements OnInit {
   openEditTicketModal(ticket: any) {
     this.editingTicket = { ...ticket };
     this.editTicketModalOpen = true;
+  }
+
+  openEditBandModal(band: BandModel) {
+    this.editingBand = { ...band };
+    this.editBandModalOpen = true;
+  }
+
+  closeEditBandModal() {
+    this.editBandModalOpen = false;
+    this.editingBand = {
+      id: null,
+      name: '',
+      image_url: '',
+      logo_url: '',
+      description: '',
+      day_id: 1,
+    };
   }
 
   closeEditCampingModal() {
@@ -171,7 +199,8 @@ export class AdminComponent implements OnInit {
     if (
       !this.newTicket.type ||
       this.newTicket.price <= 0 ||
-      this.newTicket.availability < 0
+      this.newTicket.availability < 0 ||
+      this.newTicket.day_id === null
     ) {
       alert('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
@@ -186,6 +215,7 @@ export class AdminComponent implements OnInit {
           price: 0,
           description: '',
           availability: 0,
+          day_id: null,
         };
       },
       (error: any) => {
@@ -212,7 +242,9 @@ export class AdminComponent implements OnInit {
     if (
       !this.editingTicket.type ||
       this.editingTicket.price <= 0 ||
-      this.editingTicket.availability < 0
+      this.editingTicket.availability < 0 ||
+      this.editingTicket.day_id === null ||
+      this.editingTicket.day_id <= 0
     ) {
       alert('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
@@ -280,6 +312,39 @@ export class AdminComponent implements OnInit {
         console.error('Hiba történt:', error);
       },
     });
+  }
+
+  updateBand(): void {
+    if (
+      !this.editingBand.id ||
+      !this.editingBand.name ||
+      !this.editingBand.logo_url ||
+      !this.editingBand.description ||
+      this.editingBand.day_id <= 0
+    ) {
+      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      return;
+    }
+
+    this.bandService
+      .updateBand(this.editingBand.id, this.editingBand)
+      .subscribe(
+        (response) => {
+          alert('Zenekar sikeresen módosítva!');
+          this.loadBands();
+          this.closeEditBandModal();
+        },
+        (error) => {
+          console.error('Hiba történt a módosítás során:', error);
+          if (error.status === 404) {
+            alert(
+              'A zenekar nem található, próbálj meg egy létező azonosítót használni.'
+            );
+          } else {
+            alert('Hiba történt a módosítás során.');
+          }
+        }
+      );
   }
 
   deleteBand(id: number | undefined) {
