@@ -3,8 +3,12 @@
     @if(band){
     <img [src]="band.image_url" alt="{{ band.name }}" class="bandlogo-img" />
     <h1>{{ band.name }}</h1>
-    <p>{{ band.description }}</p>
-    <p>{{ band.days?.date }}</p>
+    <p>Leírás: {{ band.description }}</p>
+    <p>
+      Idő: {{ band.days?.start_time }} - {{ band.days?.end_time }} Között
+      játszik
+    </p>
+    <p>Dátum: {{ band.days?.date }}</p>
     } @else {
     <p>Hiba a banda betöltésekor...</p>
     }

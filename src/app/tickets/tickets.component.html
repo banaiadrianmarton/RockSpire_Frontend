@@ -1,7 +1,8 @@
 <div class="background">
   <div class="container">
+    @if(tickets.length > 0){
     <h2>Elérhető jegyek</h2>
-    <div class="ticket-list" *ngIf="tickets.length > 0; else noTickets">
+    <div class="ticket-list">
       <div class="ticket-card" *ngFor="let ticket of tickets">
         <h3>{{ ticket.type }}</h3>
         <p class="price">{{ ticket.price }} Ft</p>
@@ -39,10 +40,9 @@
         </button>
       </div>
     </div>
-
-    <ng-template #noTickets>
-      <p class="no-tickets">🚫 Nincs elérhető jegy</p>
-    </ng-template>
+    } @else {
+    <p class="no-tickets">🚫 Nincs elérhető jegy</p>
+    }
   </div>
 
   <footer class="footer">

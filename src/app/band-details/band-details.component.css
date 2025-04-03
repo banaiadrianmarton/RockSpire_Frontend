@@ -37,7 +37,7 @@
 img {
   width: 100%;
   height: auto;
-  max-width: 800px;
+  max-width: 450px;
   border-radius: 15px;
   transition: transform 0.3s;
   background-color: rgb(254, 167, 28, 0.5);

@@ -28,6 +28,18 @@
   position: relative;
 }
 
+.description {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fea71c;
+  padding: 15px;
+  margin: 10px auto;
+  max-width: 1000px;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
 .footer {
   margin-top: auto;
   width: 100%;
@@ -45,45 +57,125 @@
   font-weight: bold;
 }
 
-.map-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.map {
+  position: relative;
   width: 100%;
-  padding: 2em;
-}
-
-.map-container img {
-  width: 100%;
-  max-width: 1200px;
-  height: auto;
+  height: 60vh;
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  display: block;
 }
 
-.map-container img:hover {
-  transform: scale(1.03);
+.area {
+  position: absolute;
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: rgba(255, 69, 0, 0.8);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  background-repeat: no-repeat;
+  background-size: 60px 60px;
+  background-position: center;
+}
 
-  @media (max-width: 768px) {
-    .map-container {
-      padding: 1em;
-    }
+.stage {
+  background-image: url("/mapIcons/music_note_30dp_FFFFFF_FILL0_wght300_GRAD0_opsz24.png");
+  top: 20%;
+  left: 25%;
+  width: 100px;
+  height: 100px;
+}
 
-    .map-container img {
-      max-width: 95%;
-    }
+#food {
+  background-image: url("/mapIcons/restaurant_30dp_FFFFFF_FILL0_wght300_GRAD0_opsz24.png");
+  top: 20%;
+  right: 25%;
+  width: 100px;
+  height: 100px;
+}
+
+#merch {
+  background-image: url("/mapIcons/shopping_bag_30dp_FFFFFF_FILL0_wght300_GRAD0_opsz24.png");
+  top: 50%;
+  left: 25%;
+  width: 100px;
+  height: 100px;
+}
+
+#mobil-house {
+  background-image: url("/mapIcons/house_30dp_FFFFFF_FILL0_wght300_GRAD0_opsz24.png");
+  top: 50%;
+  right: 25%;
+  width: 100px;
+  height: 100px;
+}
+
+#entrance {
+  background-image: url("/mapIcons/gate_30dp_FFFFFF_FILL0_wght300_GRAD0_opsz24.png");
+  top: 5%;
+  left: 45%;
+  width: 100px;
+  height: 100px;
+}
+
+@media (max-width: 768px) {
+  .map {
+    height: 60vh;
   }
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      scale: 0.95;
-      transform: translateY(-30px);
-    }
+  .area {
+    font-size: 1em;
+    padding: 0.8em;
+  }
 
-    100% {
-      opacity: 1;
-    }
+  #stage1 {
+    width: 15%;
+    height: 10%;
+    top: 20%;
+    left: 25%;
+  }
+
+  #food {
+    width: 15%;
+    height: 10%;
+    top: 20%;
+    right: 25%;
+  }
+
+  #merch {
+    width: 15%;
+    height: 10%;
+    top: 50%;
+    left: 25%;
+  }
+
+  #mobil-house {
+    width: 15%;
+    height: 10%;
+    top: 50%;
+    right: 25%;
+  }
+
+  #entrance {
+    width: 15%;
+    height: 10%;
+    top: 5%;
+    left: 45%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    scale: 0.95;
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 1;
   }
 }
