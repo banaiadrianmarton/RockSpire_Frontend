@@ -14,6 +14,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
+  modalVisible = false;
+  modalMessage = '';
 
   constructor(
     private cartService: CartService,
@@ -51,13 +53,13 @@ export class CartComponent implements OnInit {
 
   checkout(): void {
     if (this.cartItems.length === 0) {
-      alert('A kosár üres!');
+      this.openModal('A kosár üres!');
       return;
     }
 
     const userId = this.authService.loggedinUser?.id;
     if (!userId) {
-      alert('Be kell jelentkezned a rendelés leadásához!');
+      this.openModal('Be kell jelentkezned a rendelés leadásához!');
       return;
     }
 
@@ -80,12 +82,12 @@ export class CartComponent implements OnInit {
         .placeTicketOrder({ user_id: userId, tickets: ticketItems })
         .subscribe({
           next: (response) => {
-            alert('Jegyrendelés sikeres!');
+            this.openModal('Jegyrendelés sikeres!');
             this.cartService.clearTicketCart();
           },
           error: (err) => {
             console.error('Hiba a jegyrendelés során:', err);
-            alert(
+            this.openModal(
               err.error?.message ||
                 'Hiba történt a jegyrendelés során, próbáld újra!'
             );
@@ -98,17 +100,26 @@ export class CartComponent implements OnInit {
         .bookCampingSpot({ user_id: userId, campings: campingItems })
         .subscribe({
           next: (response) => {
-            alert('Camping foglalás sikeres!');
+            this.openModal('Camping foglalás sikeres!');
             this.cartService.clearCampingCart();
           },
           error: (err) => {
             console.error('Hiba a camping foglalás során:', err);
-            alert(
+            this.openModal(
               err.error?.message ||
-                'Hiba történt a camping foglalás során, próbáld újra!'
+                'Hiba történt a kemping foglalása során, próbáld újra!'
             );
           },
         });
     }
+  }
+
+  openModal(message: string): void {
+    this.modalMessage = message;
+    this.modalVisible = true;
+    setTimeout(() => {
+      this.modalVisible = false;
+      this.modalMessage = '';
+    }, 1100);
   }
 }

@@ -15,11 +15,7 @@
     <div class="img-wrapper">
       <div *ngFor="let band of paginatedBands; let i = index">
         <a (click)="navigateToProfile(band.id)">
-          <img
-            [src]="band.logo_url"
-            alt="{{ band.name }}"
-            class="bandlogo-img logo"
-          />
+          <img [src]="band.logo_url" alt="{{ band.name }}" class="logo" />
         </a>
         <p></p>
       </div>
@@ -38,8 +34,23 @@
 
   <footer class="footer">
     <div class="footer-content">
-      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit</p>
+      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
+      <p>Csatlakozz hozzánk a közösségi médiában és ne maradj le semmiről!</p>
+    </div>
+
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
     </div>
   </footer>
 </section>
-<router-outlet></router-outlet>

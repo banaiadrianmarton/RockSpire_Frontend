@@ -23,8 +23,6 @@ export class BandDetailsComponent implements OnInit {
     if (id) {
       this.bandService.getBand(id).subscribe(
         (response) => {
-          console.log(response);
-
           this.band = response;
         },
         (error) => {

@@ -47,9 +47,31 @@
 
   <footer class="footer">
     <div class="footer-content">
-      <p>
-        Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit 🎶
-      </p>
+      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
+      <p>Csatlakozz hozzánk a közösségi médiában és ne maradj le semmiről!</p>
+    </div>
+
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
     </div>
   </footer>
 </div>
+
+@if(modalVisible){
+<div class="modal-overlay">
+  <div class="modal-container">
+    <p>{{ modalMessage }}</p>
+  </div>
+</div>
+}

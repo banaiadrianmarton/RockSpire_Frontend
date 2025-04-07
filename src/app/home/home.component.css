@@ -73,6 +73,24 @@
   font-weight: bold;
 }
 
+.social-icons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #fea71c;
+  transform: scale(1.2);
+}
+
 .pagination {
   text-align: center;
   margin-top: 20px;

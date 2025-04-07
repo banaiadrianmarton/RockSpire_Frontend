@@ -24,7 +24,6 @@ export const authGuard: CanActivateFn = (route, state) => {
     path === 'tickets' ||
     path === 'camping'
   ) {
-    router.navigate(['admin']);
     return authService.loggedinUser.is_admin === false;
   }
 

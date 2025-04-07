@@ -14,6 +14,8 @@ import { CartService } from '../services/cart.service';
 })
 export class CampingComponent implements OnInit {
   campingSpots: CampingModel[] = [];
+  modalVisible = false;
+  modalMessage = '';
 
   constructor(
     private campingService: CampingService,
@@ -51,48 +53,26 @@ export class CampingComponent implements OnInit {
   addToCart(spot: CampingModel): void {
     if (spot.quantity > 0) {
       if (!this.authService.loggedinUser) {
-        this.router.navigate(['login']);
-        alert('A foglaláshoz be kell jelentkezned!');
+        this.openModal('A foglaláshoz be kell jelentkezned!');
+        setTimeout(() => {
+          this.router.navigate(['login']);
+        }, 1100);
         return;
       }
       this.cartService.addToCart({ ...spot, cartCategory: 'camping' });
-      alert(
+      this.openModal(
         `${spot.quantity} db ${spot.type} camping hely hozzáadva a kosárhoz!`
       );
       spot.quantity = 0;
     }
   }
 
-  bookSpot(spot: CampingModel) {
-    if ((spot.quantity || 0) > 0) {
-      if (!this.authService.loggedinUser) {
-        this.router.navigate(['login']);
-        alert('A foglaláshoz be kell jelentkezned!');
-        return;
-      }
-
-      const orderData = {
-        user_id: this.authService.loggedinUser.id,
-        campings: [
-          {
-            camping_id: spot.id,
-            quantity: spot.quantity,
-          },
-        ],
-      };
-
-      this.campingService.bookCampingSpot(orderData).subscribe(
-        (response) => {
-          alert(
-            `Sikeresen lefoglaltál ${spot.quantity} db ${spot.type} helyet!`
-          );
-          spot.availability -= spot.quantity || 0;
-          spot.quantity = 0;
-        },
-        (error) => {
-          console.error('Foglalás hiba:', error);
-        }
-      );
-    }
+  openModal(message: string) {
+    this.modalMessage = message;
+    this.modalVisible = true;
+    setTimeout(() => {
+      this.modalVisible = false;
+      this.modalMessage = '';
+    }, 1100);
   }
 }

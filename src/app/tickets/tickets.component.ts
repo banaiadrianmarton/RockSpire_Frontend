@@ -14,6 +14,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class TicketsComponent {
   tickets: TicketModel[] = [];
+  modalVisible = false;
+  modalMessage = '';
 
   constructor(
     private ticketService: TicketService,
@@ -49,43 +51,26 @@ export class TicketsComponent {
   addToCart(ticket: TicketModel): void {
     if (ticket.quantity > 0) {
       if (!this.authService.loggedinUser) {
-        this.router.navigate(['login']);
-        alert('A foglaláshoz be kell jelentkezned!');
+        this.openModal('A foglaláshoz be kell jelentkezned!');
+        setTimeout(() => {
+          this.router.navigate(['login']);
+        }, 1100);
         return;
       }
       this.cartService.addToCart({ ...ticket, cartCategory: 'ticket' });
-      alert(`${ticket.quantity} db ${ticket.type} jegy hozzáadva a kosárhoz!`);
+      this.openModal(
+        `${ticket.quantity} db ${ticket.type} jegy hozzáadva a kosárhoz!`
+      );
       ticket.quantity = 0;
     }
   }
 
-  buyTicket(ticket: TicketModel): void {
-    if (ticket.quantity > 0) {
-      const orderData = {
-        tickets: [
-          {
-            ticket_id: ticket.id,
-            quantity: ticket.quantity,
-          },
-        ],
-      };
-
-      this.ticketService.placeTicketOrder(orderData).subscribe({
-        next: (response) => {
-          alert(
-            `${ticket.quantity} db ${ticket.type} jegyet sikeresen megvásároltál!`
-          );
-          ticket.availability -= ticket.quantity;
-          ticket.quantity = 0;
-        },
-        error: (err) => {
-          console.error('Hiba a jegyvásárlás során:', err);
-          alert(
-            err.error?.message ||
-              'Hiba történt a jegyvásárlás során, próbáld újra!'
-          );
-        },
-      });
-    }
+  openModal(message: string): void {
+    this.modalMessage = message;
+    this.modalVisible = true;
+    setTimeout(() => {
+      this.modalVisible = false;
+      this.modalMessage = '';
+    }, 1100);
   }
 }
