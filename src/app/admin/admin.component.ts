@@ -17,6 +17,10 @@ import { BandService } from '../services/band.service';
 export class AdminComponent implements OnInit {
   activeTab: string = 'camping';
 
+  deleteConfirmOpen: boolean = false;
+  deleteTarget: { type: 'camping' | 'ticket' | 'band'; id: number } | null =
+    null;
+
   campingSpots: any[] = [];
   newCamping = {
     type: '',
@@ -40,6 +44,8 @@ export class AdminComponent implements OnInit {
     image_url: '',
     logo_url: '',
     description: '',
+    start_time: '',
+    end_time: '',
     day_id: 1,
   };
 
@@ -69,8 +75,12 @@ export class AdminComponent implements OnInit {
     image_url: '',
     logo_url: '',
     description: '',
+    start_time: '',
+    end_time: '',
     day_id: 1,
   };
+
+  successMessage: string = '';
 
   constructor(
     private campingService: CampingService,
@@ -87,6 +97,44 @@ export class AdminComponent implements OnInit {
     this.loadBands();
   }
 
+  confirmDelete(type: 'camping' | 'ticket' | 'band', id: number) {
+    this.deleteConfirmOpen = true;
+    this.deleteTarget = { type, id };
+  }
+
+  showSuccess(message: string) {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 1100);
+  }
+
+  confirmDeletion() {
+    if (!this.deleteTarget) return;
+
+    const { type, id } = this.deleteTarget;
+
+    if (type === 'camping') {
+      this.campingService.deleteCampingSpot(id).subscribe(() => {
+        this.campingSpots = this.campingSpots.filter((c) => c.id !== id);
+        this.showSuccess('Camping sikeresen törölve!');
+        this.closeDeleteModal();
+      });
+    } else if (type === 'ticket') {
+      this.ticketService.deleteTicket(id).subscribe(() => {
+        this.tickets = this.tickets.filter((t) => t.id !== id);
+        this.showSuccess('Jegy sikeresen törölve!');
+        this.closeDeleteModal();
+      });
+    } else if (type === 'band') {
+      this.bandService.deleteBand(id).subscribe(() => {
+        this.bands = this.bands.filter((b) => b.id !== id);
+        this.showSuccess('Zenekar sikeresen törölve!');
+        this.closeDeleteModal();
+      });
+    }
+  }
+
   openEditCampingModal(spot: any) {
     this.editingCamping = { ...spot };
     this.editCampingModalOpen = true;
@@ -100,6 +148,11 @@ export class AdminComponent implements OnInit {
   openEditBandModal(band: BandModel) {
     this.editingBand = { ...band };
     this.editBandModalOpen = true;
+  }
+
+  closeDeleteModal() {
+    this.deleteConfirmOpen = false;
+    this.deleteTarget = null;
   }
 
   closeEditBandModal() {
@@ -160,13 +213,13 @@ export class AdminComponent implements OnInit {
       this.newCamping.price <= 0 ||
       this.newCamping.availability < 0
     ) {
-      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
     }
 
     this.campingService.addCampingSpot(this.newCamping).subscribe(
       () => {
-        alert('Camping sikeresen hozzáadva!');
+        this.showSuccess('Camping sikeresen hozzáadva!');
         this.loadCampingSpots();
         this.newCamping = {
           type: '',
@@ -177,20 +230,7 @@ export class AdminComponent implements OnInit {
       },
       (error) => {
         console.error('Hiba történt:', error);
-        alert('Hiba történt a camping hozzáadásakor.');
-      }
-    );
-  }
-
-  deleteCamping(id: number) {
-    this.campingService.deleteCampingSpot(id).subscribe(
-      () => {
-        alert('Camping sikeresen törölve!');
-        this.campingSpots = this.campingSpots.filter((spot) => spot.id !== id);
-      },
-      (error) => {
-        console.error('Hiba történt:', error);
-        alert('Hiba történt a törlés során.');
+        this.showSuccess('Hiba történt a camping hozzáadásakor.');
       }
     );
   }
@@ -202,13 +242,13 @@ export class AdminComponent implements OnInit {
       this.newTicket.availability < 0 ||
       this.newTicket.day_id === null
     ) {
-      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
     }
 
     this.ticketService.addTicket(this.newTicket).subscribe(
       () => {
-        alert('Jegy sikeresen hozzáadva!');
+        this.showSuccess('Jegy sikeresen hozzáadva!');
         this.loadTickets();
         this.newTicket = {
           type: '',
@@ -220,20 +260,7 @@ export class AdminComponent implements OnInit {
       },
       (error: any) => {
         console.error('Hiba történt:', error);
-        alert('Hiba történt a jegy hozzáadásakor.');
-      }
-    );
-  }
-
-  deleteTicket(id: number) {
-    this.ticketService.deleteTicket(id).subscribe(
-      () => {
-        alert('Jegy sikeresen törölve!');
-        this.tickets = this.tickets.filter((ticket) => ticket.id !== id);
-      },
-      (error: any) => {
-        console.error('Hiba történt:', error);
-        alert('Hiba történt a törlés során.');
+        this.showSuccess('Hiba történt a jegy hozzáadásakor.');
       }
     );
   }
@@ -246,7 +273,7 @@ export class AdminComponent implements OnInit {
       this.editingTicket.day_id === null ||
       this.editingTicket.day_id <= 0
     ) {
-      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
     }
 
@@ -254,13 +281,13 @@ export class AdminComponent implements OnInit {
       .updateTicket(this.editingTicket.id, this.editingTicket)
       .subscribe(
         (response) => {
-          alert('Jegy sikeresen módosítva!');
+          this.showSuccess('Jegy sikeresen módosítva!');
           this.loadTickets();
           this.closeEditTicketModal();
         },
         (error) => {
           console.error('Hiba történt a módosítás során:', error);
-          alert('Hiba történt a módosítás során.');
+          this.showSuccess('Hiba történt a jegy módosításakor.');
         }
       );
   }
@@ -271,7 +298,7 @@ export class AdminComponent implements OnInit {
       this.editingCamping.price <= 0 ||
       this.editingCamping.availability < 0
     ) {
-      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
     }
 
@@ -279,13 +306,13 @@ export class AdminComponent implements OnInit {
       .updateCampingSpot(this.editingCamping.id, this.editingCamping)
       .subscribe(
         (response) => {
-          alert('Camping sikeresen módosítva!');
+          this.showSuccess('Camping sikeresen módosítva!');
           this.loadCampingSpots();
           this.closeEditCampingModal();
         },
         (error) => {
           console.error('Hiba történt a módosítás során:', error);
-          alert('Hiba történt a módosítás során.');
+          this.showSuccess('Hiba történt a camping módosításakor.');
         }
       );
   }
@@ -300,16 +327,21 @@ export class AdminComponent implements OnInit {
     this.bandService.createBand(this.newBand).subscribe({
       next: (response) => {
         console.log('Sikeres mentés:', response);
+        this.loadBands();
+        this.showSuccess('Zenekar sikeresen hozzáadva!');
         this.newBand = {
           name: '',
           image_url: '',
           logo_url: '',
           description: '',
+          start_time: '',
+          end_time: '',
           day_id: 1,
         };
       },
       error: (error) => {
         console.error('Hiba történt:', error);
+        this.showSuccess('Hiba történt a zenekar hozzáadásakor.');
       },
     });
   }
@@ -322,7 +354,7 @@ export class AdminComponent implements OnInit {
       !this.editingBand.description ||
       this.editingBand.day_id <= 0
     ) {
-      alert('Kérlek töltsd ki az összes mezőt helyesen!');
+      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
       return;
     }
 
@@ -330,33 +362,21 @@ export class AdminComponent implements OnInit {
       .updateBand(this.editingBand.id, this.editingBand)
       .subscribe(
         (response) => {
-          alert('Zenekar sikeresen módosítva!');
+          this.showSuccess('Zenekar sikeresen módosítva!');
           this.loadBands();
           this.closeEditBandModal();
         },
         (error) => {
+          console.log(this.editingBand);
           console.error('Hiba történt a módosítás során:', error);
           if (error.status === 404) {
-            alert(
+            this.showSuccess(
               'A zenekar nem található, próbálj meg egy létező azonosítót használni.'
             );
           } else {
-            alert('Hiba történt a módosítás során.');
+            this.showSuccess('Hiba történt a módosítás során.');
           }
         }
       );
-  }
-
-  deleteBand(id: number | undefined) {
-    this.bandService.deleteBand(id).subscribe(
-      () => {
-        alert('Zenekar sikeresen törölve!');
-        this.bands = this.bands.filter((band) => band.id !== id);
-      },
-      (error) => {
-        console.error('Hiba történt:', error);
-        alert('Hiba történt a törlés során.');
-      }
-    );
   }
 }

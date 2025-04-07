@@ -15,8 +15,8 @@ import { CartComponent } from './cart/cart.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'tickets', component: TicketsComponent },
-  { path: 'camping', component: CampingComponent },
+  { path: 'tickets', component: TicketsComponent, canActivate: [authGuard] },
+  { path: 'camping', component: CampingComponent, canActivate: [authGuard] },
   { path: 'map', component: MapComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'login', component: LoginComponent },
@@ -24,6 +24,5 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'bandDetails/:id', component: BandDetailsComponent },
-  { path: 'cart', component: CartComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: 'cart', component: CartComponent, canActivate: [authGuard] },
 ];

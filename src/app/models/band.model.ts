@@ -7,5 +7,7 @@ export interface BandModel {
   logo_url: string;
   description: string;
   day_id: number;
+  start_time: string;
+  end_time: string;
   days?: DayModel;
 }

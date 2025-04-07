@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TicketModel } from '../models/ticket.model';
 import { TicketService } from '../services/ticket.service';
 import { CartService } from '../services/cart.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tickets',
@@ -16,7 +17,9 @@ export class TicketsComponent {
 
   constructor(
     private ticketService: TicketService,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +48,11 @@ export class TicketsComponent {
 
   addToCart(ticket: TicketModel): void {
     if (ticket.quantity > 0) {
+      if (!this.authService.loggedinUser) {
+        this.router.navigate(['login']);
+        alert('A foglaláshoz be kell jelentkezned!');
+        return;
+      }
       this.cartService.addToCart({ ...ticket, cartCategory: 'ticket' });
       alert(`${ticket.quantity} db ${ticket.type} jegy hozzáadva a kosárhoz!`);
       ticket.quantity = 0;

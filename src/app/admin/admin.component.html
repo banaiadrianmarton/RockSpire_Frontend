@@ -21,7 +21,13 @@
         Zenekarok
       </button>
     </div>
-
+    @if (successMessage) {
+    <div class="success-message-overlay">
+      <div class="success-message-box">
+        {{ successMessage }}
+      </div>
+    </div>
+    }
     <div *ngIf="activeTab === 'bands'">
       <form (submit)="addBand(); $event.preventDefault()">
         <input
@@ -52,6 +58,20 @@
           name="description"
         />
         <input
+          [(ngModel)]="newBand.start_time"
+          placeholder="Kezdési időpont (óra:perc)"
+          type="text"
+          required
+          name="start_time"
+        />
+        <input
+          [(ngModel)]="newBand.end_time"
+          placeholder="Befejezési időpont (óra:perc)"
+          type="text"
+          required
+          name="end_time"
+        />
+        <input
           type="number"
           [(ngModel)]="newBand.day_id"
           placeholder="Nap ID"
@@ -63,9 +83,11 @@
 
       <ul>
         <li *ngFor="let band of bands">
-          {{ band.name }} - {{ band.description }} - Nap ID: {{ band.day_id }}
+          {{ band.name }} - {{ band.description }} - ({{ band.start_time }}-{{
+            band.end_time
+          }}) - Nap ID: {{ band.day_id }}
           <div class="button-holder">
-            <button (click)="deleteBand(band.id)">Törlés</button>
+            <button (click)="confirmDelete('band', band.id!)">Törlés</button>
             <button (click)="openEditBandModal(band)">Szerkesztés</button>
           </div>
         </li>
@@ -110,7 +132,7 @@
           {{ spot.type }} - {{ spot.description }} - {{ spot.price }} Ft / éj -
           {{ spot.availability }} db
           <div class="button-holder">
-            <button (click)="deleteCamping(spot.id)">Törlés</button>
+            <button (click)="confirmDelete('camping', spot.id)">Törlés</button>
             <button (click)="openEditCampingModal(spot)">Szerkesztés</button>
           </div>
         </li>
@@ -163,7 +185,7 @@
           Dátum: {{ day.date }}
           }
           <div class="button-holder">
-            <button (click)="deleteTicket(ticket.id)">Törlés</button>
+            <button (click)="confirmDelete('ticket', ticket.id)">Törlés</button>
             <button (click)="openEditTicketModal(ticket)">Szerkesztés</button>
           </div>
         </li>
@@ -283,6 +305,20 @@
             name="editBandDescription"
           />
           <input
+            [(ngModel)]="editingBand.start_time"
+            placeholder="Kezdési Időpont (óra:perc)"
+            type="text"
+            required
+            name="editBandstart_time"
+          />
+          <input
+            [(ngModel)]="editingBand.end_time"
+            placeholder="Befejezési Időpont (óra:perc)"
+            type="text"
+            required
+            name="editBandend_time"
+          />
+          <input
             [(ngModel)]="editingBand.day_id"
             placeholder="Nap ID"
             type="number"
@@ -291,6 +327,25 @@
           />
           <button type="submit">Mentés</button>
         </form>
+      </div>
+    </div>
+    <div
+      class="delete-confirm-overlay"
+      *ngIf="deleteConfirmOpen"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="delete-confirm-modal">
+        <h2>Biztosan törlöd?</h2>
+        <p>A művelet nem visszavonható.</p>
+        <div class="actions">
+          <button class="btn delete" (click)="confirmDeletion()">
+            Igen, törlöm
+          </button>
+          <button class="btn cancel" (click)="closeDeleteModal()">
+            Mégsem
+          </button>
+        </div>
       </div>
     </div>
   </div>
