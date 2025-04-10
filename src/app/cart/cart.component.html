@@ -5,7 +5,8 @@
       @if(cartItems.length){
 
       <div class="cart-wrapper">
-        <div *ngFor="let item of cartItems" class="cart-item">
+        @for (item of cartItems; track $index) {
+        <div class="cart-item">
           <div class="flex-between">
             <h3>{{ item.type }}</h3>
             <h3>{{ item.price }} Ft</h3>
@@ -53,6 +54,7 @@
             <h3 class="">{{ item.price * item.quantity }} Ft</h3>
           </div>
         </div>
+        }
         <p class="flex-between bold">
           <span>Végösszeg</span> {{ getTotalPrice() }} Ft
         </p>

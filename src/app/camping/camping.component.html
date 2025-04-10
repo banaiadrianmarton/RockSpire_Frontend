@@ -3,7 +3,8 @@
     @if(campingSpots.length > 0){
     <h2>Elérhető Camping Helyek</h2>
     <div class="camping-container">
-      <div class="camping-card" *ngFor="let spot of campingSpots">
+      @for (spot of campingSpots; track $index) {
+      <div class="camping-card">
         <h3>{{ spot.type }}</h3>
         <p class="price">{{ spot.price }} Ft / éj</p>
         <p class="availability">Elérhető: {{ spot.availability }} db</p>
@@ -25,6 +26,7 @@
           Foglalás
         </button>
       </div>
+      }
     </div>
     } @else {
     <p class="no-camping">🚫Nincs elérhető kemping hely</p>

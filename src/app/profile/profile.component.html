@@ -1,4 +1,5 @@
-<div *ngIf="user && !user.is_admin">
+@if(user && !user.is_admin){
+<div>
   <div class="background">
     <div class="container">
       <h3>Rendeléseim</h3>
@@ -21,8 +22,9 @@
               </tr>
             </thead>
             <tbody>
-              @for (order of orders; track $index) {
-              <tr *ngFor="let camping of order.campings">
+              @for (order of orders; track $index) { @for (camping of
+              order.campings; track $index) {
+              <tr>
                 <td data-label="Azonosító">{{ order.id }}</td>
                 <td data-label="Termék típusa">{{ camping.type }}</td>
                 <td data-label="Mennyiség">{{ camping.quantity }}</td>
@@ -32,8 +34,9 @@
                 <td data-label="Leírás">{{ camping.description }}</td>
                 <td data-label="Rendelés típusa">Kemping</td>
               </tr>
-              } @for (ticketOrder of ticketOrders; track $index) {
-              <tr *ngFor="let ticket of ticketOrder.tickets">
+              } } @for (ticketOrder of ticketOrders; track $index) { @for
+              (ticket of ticketOrder.tickets; track $index) {
+              <tr>
                 <td data-label="Azonosító">{{ ticketOrder.id }}</td>
                 <td data-label="Termék típusa">{{ ticket.type }}</td>
                 <td data-label="Mennyiség">{{ ticket.quantity }}</td>
@@ -43,13 +46,14 @@
                 <td data-label="Leírás">{{ ticket.description }}</td>
                 <td data-label="Rendelés típusa">Jegy</td>
               </tr>
-              }
+              } }
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
+
   <footer class="footer">
     <div class="footer-content">
       <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
@@ -72,3 +76,4 @@
     </div>
   </footer>
 </div>
+}

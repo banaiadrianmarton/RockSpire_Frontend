@@ -82,7 +82,7 @@ export class CartComponent implements OnInit {
         .placeTicketOrder({ user_id: userId, tickets: ticketItems })
         .subscribe({
           next: (response) => {
-            this.openModal('Jegyrendelés sikeres!');
+            this.openModal('Sikeres Fizetés!');
             this.cartService.clearTicketCart();
           },
           error: (err) => {
@@ -100,7 +100,7 @@ export class CartComponent implements OnInit {
         .bookCampingSpot({ user_id: userId, campings: campingItems })
         .subscribe({
           next: (response) => {
-            this.openModal('Camping foglalás sikeres!');
+            this.openModal('Sikeres Fizetés!');
             this.cartService.clearCampingCart();
           },
           error: (err) => {

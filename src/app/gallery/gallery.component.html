@@ -29,10 +29,11 @@
     </div>
   </footer>
 </div>
-
-<div class="modal" *ngIf="selectedImage" (click)="closeModal()">
+@if(selectedImage){
+<div class="modal" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <img [src]="selectedImage" alt="Kép nagyobb méretben" class="modal-image" />
     <span class="close" (click)="closeModal()">&times;</span>
   </div>
 </div>
+}

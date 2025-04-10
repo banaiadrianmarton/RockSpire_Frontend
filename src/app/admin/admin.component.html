@@ -27,8 +27,8 @@
         {{ successMessage }}
       </div>
     </div>
-    }
-    <div *ngIf="activeTab === 'bands'">
+    } @if(activeTab === 'bands'){
+    <div>
       <form (submit)="addBand(); $event.preventDefault()">
         <input
           type="text"
@@ -82,7 +82,8 @@
       </form>
 
       <ul>
-        <li *ngFor="let band of bands">
+        @for (band of bands; track $index) {
+        <li>
           {{ band.name }} - {{ band.description }} - ({{ band.start_time }}-{{
             band.end_time
           }}) - Nap ID: {{ band.day_id }}
@@ -91,10 +92,11 @@
             <button (click)="openEditBandModal(band)">Szerkesztés</button>
           </div>
         </li>
+        }
       </ul>
     </div>
-
-    <div *ngIf="activeTab === 'camping'">
+    } @if(activeTab === 'camping'){
+    <div>
       <form (submit)="addCamping(); $event.preventDefault()">
         <input
           [(ngModel)]="newCamping.type"
@@ -128,7 +130,8 @@
       </form>
 
       <ul>
-        <li *ngFor="let spot of campingSpots">
+        @for (spot of campingSpots; track $index) {
+        <li>
           {{ spot.type }} - {{ spot.description }} - {{ spot.price }} Ft / éj -
           {{ spot.availability }} db
           <div class="button-holder">
@@ -136,9 +139,11 @@
             <button (click)="openEditCampingModal(spot)">Szerkesztés</button>
           </div>
         </li>
+        }
       </ul>
     </div>
-    <div *ngIf="activeTab === 'tickets'">
+    } @if(activeTab === 'tickets'){
+    <div>
       <form (submit)="addTicket(); $event.preventDefault()">
         <input
           [(ngModel)]="newTicket.type"
@@ -177,21 +182,23 @@
         />
         <button type="submit">Hozzáadás</button>
       </form>
-
       <ul>
-        <li *ngFor="let ticket of tickets">
+        @for (ticket of tickets; track $index) {
+        <li>
           {{ ticket.type }} - {{ ticket.description }} - {{ ticket.price }} Ft -
-          {{ ticket.availability }} db @for (day of ticket.days; track $index) {
-          Dátum: {{ day.date }}
+          {{ ticket.availability }} db | @for (day of ticket.days; track $index)
+          { Dátum: {{ day.date }}
           }
           <div class="button-holder">
             <button (click)="confirmDelete('ticket', ticket.id)">Törlés</button>
             <button (click)="openEditTicketModal(ticket)">Szerkesztés</button>
           </div>
         </li>
+        }
       </ul>
     </div>
-    <div class="modal" *ngIf="editTicketModalOpen">
+    } @if(editTicketModalOpen){
+    <div class="modal">
       <div class="modal-content">
         <span class="close" (click)="closeEditTicketModal()">&times;</span>
         <h2>Jegy szerkesztése</h2>
@@ -235,7 +242,8 @@
         </form>
       </div>
     </div>
-    <div class="modal" *ngIf="editCampingModalOpen">
+    } @if(editCampingModalOpen){
+    <div class="modal">
       <div class="modal-content">
         <span class="close" (click)="closeEditCampingModal()">&times;</span>
         <h2>Kemping szerkesztése</h2>
@@ -272,7 +280,8 @@
         </form>
       </div>
     </div>
-    <div class="modal" *ngIf="editBandModalOpen">
+    } @if(editBandModalOpen){
+    <div class="modal">
       <div class="modal-content">
         <span class="close" (click)="closeEditBandModal()">×</span>
         <h2>Zenekar szerkesztése</h2>
@@ -329,12 +338,8 @@
         </form>
       </div>
     </div>
-    <div
-      class="delete-confirm-overlay"
-      *ngIf="deleteConfirmOpen"
-      role="dialog"
-      aria-modal="true"
-    >
+    } @if(deleteConfirmOpen){
+    <div class="delete-confirm-overlay" role="dialog" aria-modal="true">
       <div class="delete-confirm-modal">
         <h2>Biztosan törlöd?</h2>
         <p>A művelet nem visszavonható.</p>
@@ -348,6 +353,7 @@
         </div>
       </div>
     </div>
+    }
   </div>
   <footer class="footer">
     <div class="footer-content">

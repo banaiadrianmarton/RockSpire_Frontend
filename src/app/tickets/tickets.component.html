@@ -3,16 +3,20 @@
     @if(tickets.length > 0){
     <h2>Elérhető jegyek</h2>
     <div class="ticket-list">
-      <div class="ticket-card" *ngFor="let ticket of tickets">
+      @for (ticket of tickets; track $index) {
+      <div class="ticket-card">
         <h3>{{ ticket.type }}</h3>
         <p class="price">{{ ticket.price }} Ft</p>
         <p class="availability">
           Elérhető: <strong>{{ ticket.availability }}</strong> db
         </p>
-        <div *ngIf="ticket.days && ticket.days.length">
-          <li *ngFor="let day of ticket.days">Dátum: {{ day.date }}</li>
+        @if(ticket.days && ticket.days.length){
+        <div>
+          @for (day of ticket.days; track $index) {
+          <li>Dátum: {{ day.date }}</li>
+          }
         </div>
-
+        }
         <div class="quantity-container">
           <button
             class="btn--secondary"
@@ -39,6 +43,7 @@
           Vásárlás
         </button>
       </div>
+      }
     </div>
     } @else {
     <p class="no-tickets">🚫 Nincs elérhető jegy</p>

@@ -8,17 +8,21 @@
     />
     <select [(ngModel)]="searchDate" (ngModelChange)="currentPage = 0">
       <option value="">Összes dátum</option>
-      <option *ngFor="let date of availableDates" [value]="date">
+      @for (date of availableDates; track $index) {
+      <option [value]="date">
         {{ date }}
       </option>
+      }
     </select>
     <div class="img-wrapper">
-      <div *ngFor="let band of paginatedBands; let i = index">
+      @for (band of paginatedBands; track $index) {
+      <div>
         <a (click)="navigateToProfile(band.id)">
           <img [src]="band.logo_url" alt="{{ band.name }}" class="logo" />
         </a>
         <p></p>
       </div>
+      }
     </div>
     <div class="pagination">
       <button (click)="prevPage()" [disabled]="currentPage === 0">Előző</button>
