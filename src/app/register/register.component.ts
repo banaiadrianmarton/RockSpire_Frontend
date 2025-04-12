@@ -31,7 +31,6 @@ export class RegisterComponent {
       this.errorMessage = 'Minden mező kitöltése kötelező!';
       return;
     }
-
     this.authService.register(this.model).subscribe({
       next: (successful: boolean) => {
         if (successful) {

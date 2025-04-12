@@ -6,6 +6,7 @@
       @for (spot of campingSpots; track $index) {
       <div class="camping-card">
         <h3>{{ spot.type }}</h3>
+        <p>{{ spot.description }}</p>
         <p class="price">{{ spot.price }} Ft / éj</p>
         <p class="availability">Elérhető: {{ spot.availability }} db</p>
 
@@ -34,7 +35,10 @@
   </div>
   <footer class="footer">
     <div class="footer-content">
-      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
+      <p>
+        Ha van már fiókod akkor töltsd le a mobilalkalmazásunkat és élvezd
+        kedvenc bandáid zenéit!
+      </p>
       <p>Csatlakozz hozzánk a közösségi médiában és ne maradj le semmiről!</p>
     </div>
 

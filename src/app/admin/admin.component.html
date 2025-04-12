@@ -86,7 +86,7 @@
         <li>
           {{ band.name }} - {{ band.description }} - ({{ band.start_time }}-{{
             band.end_time
-          }}) - Nap ID: {{ band.day_id }}
+          }}) - Nap ID: {{ band.day_id }} 
           <div class="button-holder">
             <button (click)="confirmDelete('band', band.id!)">Törlés</button>
             <button (click)="openEditBandModal(band)">Szerkesztés</button>
@@ -357,7 +357,10 @@
   </div>
   <footer class="footer">
     <div class="footer-content">
-      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
+      <p>
+        Ha van már fiókod akkor töltsd le a mobilalkalmazásunkat és élvezd
+        kedvenc bandáid zenéit!
+      </p>
       <p>Csatlakozz hozzánk a közösségi médiában és ne maradj le semmiről!</p>
     </div>
 

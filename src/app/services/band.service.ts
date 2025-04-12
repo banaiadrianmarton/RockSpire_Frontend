@@ -8,7 +8,7 @@ import { BandModel } from '../models/band.model';
   providedIn: 'root',
 })
 export class BandService {
-  private apiUrl = 'http://127.0.0.1:8000/api/bands';
+  private apiUrl = 'https://bgs.jedlik.eu/fb/backend/api/bands';
 
   constructor(private authService: AuthService, private http: HttpClient) {}
 

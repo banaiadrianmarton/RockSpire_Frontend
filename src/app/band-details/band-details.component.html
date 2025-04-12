@@ -4,10 +4,10 @@
     <img [src]="band.image_url" alt="{{ band.name }}" class="bandlogo-img" />
     <h1>{{ band.name }}</h1>
     <div class="description">
-      <p>Leírás: {{ band.description }}</p>
+      <p>{{ band.description }}</p>
     </div>
     <div class="time">
-      <p>Idő: {{ band.start_time }} - {{ band.end_time }} Között játszik</p>
+      <p>{{ band.start_time }} - {{ band.end_time }} Között játszik</p>
       <p>Dátum: {{ band.days?.date }}</p>
     </div>
     } @else {
@@ -17,7 +17,10 @@
 </div>
 <footer class="footer">
   <div class="footer-content">
-    <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
+      <p>
+        Ha van már fiókod akkor töltsd le a mobilalkalmazásunkat és élvezd
+        kedvenc bandáid zenéit!
+      </p>
     <p>Csatlakozz hozzánk a közösségi médiában és ne maradj le semmiről!</p>
   </div>
 

@@ -201,12 +201,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  loadTickets() {
-    this.ticketService.getTickets().subscribe((data) => {
-      this.tickets = data;
-    });
-  }
-
   addCamping() {
     if (
       !this.newCamping.type ||
@@ -233,6 +227,37 @@ export class AdminComponent implements OnInit {
         this.showSuccess('Hiba történt a camping hozzáadásakor.');
       }
     );
+  }
+
+  updateCamping() {
+    if (
+      !this.editingCamping.type ||
+      this.editingCamping.price <= 0 ||
+      this.editingCamping.availability < 0
+    ) {
+      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
+      return;
+    }
+
+    this.campingService
+      .updateCampingSpot(this.editingCamping.id, this.editingCamping)
+      .subscribe(
+        (response) => {
+          this.showSuccess('Camping sikeresen módosítva!');
+          this.loadCampingSpots();
+          this.closeEditCampingModal();
+        },
+        (error) => {
+          console.error('Hiba történt a módosítás során:', error);
+          this.showSuccess('Hiba történt a camping módosításakor.');
+        }
+      );
+  }
+
+  loadTickets() {
+    this.ticketService.getTickets().subscribe((data) => {
+      this.tickets = data;
+    });
   }
 
   addTicket() {
@@ -288,31 +313,6 @@ export class AdminComponent implements OnInit {
         (error) => {
           console.error('Hiba történt a módosítás során:', error);
           this.showSuccess('Hiba történt a jegy módosításakor.');
-        }
-      );
-  }
-
-  updateCamping() {
-    if (
-      !this.editingCamping.type ||
-      this.editingCamping.price <= 0 ||
-      this.editingCamping.availability < 0
-    ) {
-      this.showSuccess('Kérlek töltsd ki az összes mezőt helyesen!');
-      return;
-    }
-
-    this.campingService
-      .updateCampingSpot(this.editingCamping.id, this.editingCamping)
-      .subscribe(
-        (response) => {
-          this.showSuccess('Camping sikeresen módosítva!');
-          this.loadCampingSpots();
-          this.closeEditCampingModal();
-        },
-        (error) => {
-          console.error('Hiba történt a módosítás során:', error);
-          this.showSuccess('Hiba történt a camping módosításakor.');
         }
       );
   }

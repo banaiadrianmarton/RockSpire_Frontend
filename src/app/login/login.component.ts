@@ -33,6 +33,7 @@ export class LoginComponent {
         if (!successful) {
           this.errorMessage = 'Hibás bejelentkezési adatok!';
         } else {
+          console.log('Token:', this.authService.loggedinUser?.token);
           if (this.authService.loggedinUser?.is_admin) {
             this.router.navigate(['admin']);
           } else {
@@ -41,6 +42,9 @@ export class LoginComponent {
         }
       },
       error: (err: any) => {
+        if (err.error && err.error.token) {
+          console.log('Token hibás válasz esetén:', err.error.token);
+        }
         this.errorMessage = err.error?.message ?? 'Bejelentkezési hiba!';
       },
     });

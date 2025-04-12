@@ -2,24 +2,26 @@
   <div class="container">
     <h1>Fesztivál Helyszínek</h1>
     <div class="map">
-      <div
-        class="area stage"
-        id="stage1"
-        (click)="showDescription('stage1')"
-      ></div>
-      <div class="area" id="food" (click)="showDescription('food')"></div>
-      <div class="area" id="merch" (click)="showDescription('merch')"></div>
-      <div
-        class="area"
-        id="mobil-house"
-        (click)="showDescription('mobilHouse')"
-      ></div>
+      <div class="area stage" id="stage" (click)="showDescription('stage')">
+        1
+      </div>
+      <div class="area" id="food" (click)="showDescription('food')">2</div>
+      <div class="area" id="merch" (click)="showDescription('merch')">3</div>
+      <div class="area" id="camping" (click)="showDescription('camping')">
+        4
+      </div>
       <div
         class="area"
-        id="entrance"
-        (click)="showDescription('entrance')"
-      ></div>
+        id="medical-tent"
+        (click)="showDescription('medicalTent')"
+      >
+        5
+      </div>
+      <div class="area" id="parking" (click)="showDescription('parking')">
+        6
+      </div>
     </div>
+
     @if(selectedDescription){
     <div class="description">
       {{ descriptions[selectedDescription] }}
@@ -29,10 +31,12 @@
 
   <footer class="footer">
     <div class="footer-content">
-      <p>Töltsd le a mobilalkalmazásunkat és élvezd kedvenc bandáid zenéit!</p>
+      <p>
+        Ha van már fiókod akkor töltsd le a mobilalkalmazásunkat és élvezd
+        kedvenc bandáid zenéit!
+      </p>
       <p>Csatlakozz hozzánk a közösségi médiában és ne maradj le semmiről!</p>
     </div>
-
     <div class="social-icons">
       <a href="https://facebook.com" target="_blank" aria-label="Facebook">
         <i class="fab fa-facebook-f"></i>

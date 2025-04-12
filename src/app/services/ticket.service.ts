@@ -9,8 +9,8 @@ import { TicketOrderModel } from '../models/ticketorder.model';
   providedIn: 'root',
 })
 export class TicketService {
-  private apiUrl = 'http://127.0.0.1:8000/api/tickets';
-  private orderApiUrl = 'http://127.0.0.1:8000/api/ticket-orders';
+  private apiUrl = 'https://bgs.jedlik.eu/fb/backend/api/tickets';
+  private orderApiUrl = 'https://bgs.jedlik.eu/fb/backend/api/ticket-orders';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

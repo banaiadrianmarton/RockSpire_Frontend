@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 5px auto;
   max-width: 1000px;
   width: 96%;
   background: rgba(0, 0, 0, 0.9);

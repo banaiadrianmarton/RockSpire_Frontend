@@ -4,6 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ConfigService {
-  apiUrl = 'http://127.0.0.1:8000';
+  apiUrl = 'https://bgs.jedlik.eu/fb/backend';
   constructor() {}
 }

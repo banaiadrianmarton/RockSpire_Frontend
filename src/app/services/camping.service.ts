@@ -9,7 +9,7 @@ import { CampingOrderModel } from '../models/campingorder.model';
   providedIn: 'root',
 })
 export class CampingService {
-  private apiUrl = 'http://127.0.0.1:8000/api/campings';
+  private apiUrl = 'https://bgs.jedlik.eu/fb/backend/api/campings';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -26,7 +26,7 @@ export class CampingService {
 
   bookCampingSpot(orderData: any): Observable<any> {
     return this.http.post(
-      'http://127.0.0.1:8000/api/camping-orders',
+      'https://bgs.jedlik.eu/fb/backend/api/camping-orders',
       orderData,
       {
         headers: this.getHeaders(),
@@ -48,7 +48,7 @@ export class CampingService {
 
   getUserOrders(userId: number): Observable<CampingOrderModel[]> {
     return this.http.get<CampingOrderModel[]>(
-      `http://127.0.0.1:8000/api/camping-orders/${userId}`,
+      `https://bgs.jedlik.eu/fb/backend/api/camping-orders/${userId}`,
       {
         headers: this.getHeaders(),
       }
