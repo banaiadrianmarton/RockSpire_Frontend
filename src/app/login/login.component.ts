@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   imports: [RouterLink, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  encapsulation: ViewEncapsulation.None, // ideiglenesen
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
   model = {
@@ -33,7 +33,6 @@ export class LoginComponent {
         if (!successful) {
           this.errorMessage = 'Hibás bejelentkezési adatok!';
         } else {
-          console.log('Token:', this.authService.loggedinUser?.token);
           if (this.authService.loggedinUser?.is_admin) {
             this.router.navigate(['admin']);
           } else {

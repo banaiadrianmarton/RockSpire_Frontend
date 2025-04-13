@@ -6,9 +6,9 @@
       @for (ticket of tickets; track $index) {
       <div class="ticket-card">
         <h3>{{ ticket.type }}</h3>
-        <p>{{ ticket.description }}</p>
+        <div class="description">{{ ticket.description }}</div>
         <p class="price">{{ ticket.price }} Ft</p>
-        <p class="availability">Elérhető: {{ ticket.availability }}db</p>
+        <p class="availability">Elérhető: {{ ticket.availability }} db</p>
         @if(ticket.days && ticket.days.length){
         <div>
           @for (day of ticket.days; track $index) {
@@ -39,7 +39,7 @@
           (click)="addToCart(ticket)"
           [disabled]="ticket.quantity === 0"
         >
-          Vásárlás
+          Kosárba
         </button>
       </div>
       }

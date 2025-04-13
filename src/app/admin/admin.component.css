@@ -201,6 +201,20 @@ input {
   }
 }
 
+@media (max-width: 768px) {
+  .flex-wrap {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+  }
+}
+
+@media (max-width: 400px) {
+  .tabs {
+    flex-wrap: wrap;
+  }
+}
+
 button {
   background: #fea71c;
   border: none;
@@ -224,6 +238,7 @@ ul {
 li {
   display: flex;
   margin-block: 0.5em;
+  text-align: left;
   justify-content: space-between;
   align-items: center;
   padding: 10px;

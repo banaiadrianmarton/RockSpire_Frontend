@@ -32,8 +32,8 @@ export class RegisterComponent {
       return;
     }
     this.authService.register(this.model).subscribe({
-      next: (successful: boolean) => {
-        if (successful) {
+      next: (response: any) => {
+        if (response) {
           this.successMessage = 'Sikeres regisztráció! Most bejelentkezhetsz.';
           setTimeout(() => {
             this.router.navigate(['/login']);
@@ -43,6 +43,7 @@ export class RegisterComponent {
         }
       },
       error: (err: any) => {
+        console.error('Hiba történt:', err);
         this.errorMessage = err.error?.message ?? 'Hiba történt!';
       },
     });

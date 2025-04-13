@@ -10,6 +10,7 @@
           <p>Email: {{ user.email }}</p>
         </div>
         <div class="orders">
+          @if(orders.length > 0){
           <table class="order-table">
             <thead>
               <tr>
@@ -49,6 +50,9 @@
               } }
             </tbody>
           </table>
+          } @else {
+          <div class="message">Itt fognak megjelenni a rendeléseid</div>
+          }
         </div>
       </div>
     </div>

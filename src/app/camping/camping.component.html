@@ -6,7 +6,7 @@
       @for (spot of campingSpots; track $index) {
       <div class="camping-card">
         <h3>{{ spot.type }}</h3>
-        <p>{{ spot.description }}</p>
+        <div class="description">{{ spot.description }}</div>
         <p class="price">{{ spot.price }} Ft / éj</p>
         <p class="availability">Elérhető: {{ spot.availability }} db</p>
 
@@ -24,7 +24,7 @@
           (click)="addToCart(spot)"
           [disabled]="spot.quantity === 0"
         >
-          Foglalás
+          Kosárba
         </button>
       </div>
       }

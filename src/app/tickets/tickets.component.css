@@ -14,6 +14,14 @@
   animation: fadeIn 1s ease-in-out forwards;
 }
 
+.description {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  border: #fea71c solid 2px;
+  border-radius: 1em;
+  box-shadow: 0px 5px 10px #fea71c;
+}
+
 .ticket-list {
   margin-top: 1em;
   display: grid;

@@ -157,6 +157,14 @@
   transform: scale(1.2);
 }
 
+.line-clamp-1 {
+  margin-block: 0.25em 0.5em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

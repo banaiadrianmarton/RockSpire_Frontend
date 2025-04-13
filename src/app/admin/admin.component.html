@@ -83,10 +83,10 @@
 
       <ul>
         @for (band of bands; track $index) {
-        <li>
+        <li class="flex-wrap">
           {{ band.name }} - {{ band.description }} - ({{ band.start_time }}-{{
             band.end_time
-          }}) - Nap ID: {{ band.day_id }} 
+          }}) - Nap ID: {{ band.day_id }}
           <div class="button-holder">
             <button (click)="confirmDelete('band', band.id!)">Törlés</button>
             <button (click)="openEditBandModal(band)">Szerkesztés</button>
@@ -131,7 +131,7 @@
 
       <ul>
         @for (spot of campingSpots; track $index) {
-        <li>
+        <li class="flex-wrap">
           {{ spot.type }} - {{ spot.description }} - {{ spot.price }} Ft / éj -
           {{ spot.availability }} db
           <div class="button-holder">
@@ -184,7 +184,7 @@
       </form>
       <ul>
         @for (ticket of tickets; track $index) {
-        <li>
+        <li class="flex-wrap">
           {{ ticket.type }} - {{ ticket.description }} - {{ ticket.price }} Ft -
           {{ ticket.availability }} db | @for (day of ticket.days; track $index)
           { Dátum: {{ day.date }}

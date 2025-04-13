@@ -151,6 +151,14 @@ h3 {
   font-weight: bold;
 }
 
+.description {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  border: #fea71c solid 2px;
+  border-radius: 1em;
+  box-shadow: 0px 5px 10px #fea71c;
+}
+
 .social-icons {
   margin-top: 1rem;
   display: flex;
