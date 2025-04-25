@@ -10,11 +10,10 @@
           <p>Email: {{ user.email }}</p>
         </div>
         <div class="orders">
-          @if(orders.length > 0){
+          @if(orders.length > 0 || ticketOrders.length > 0){
           <table class="order-table">
             <thead>
               <tr>
-                <th>Azonosító</th>
                 <th>Termék típusa</th>
                 <th>Mennyiség</th>
                 <th>Ár</th>
@@ -26,7 +25,6 @@
               @for (order of orders; track $index) { @for (camping of
               order.campings; track $index) {
               <tr>
-                <td data-label="Azonosító">{{ order.id }}</td>
                 <td data-label="Termék típusa">{{ camping.type }}</td>
                 <td data-label="Mennyiség">{{ camping.quantity }}</td>
                 <td data-label="Ár">
@@ -38,7 +36,6 @@
               } } @for (ticketOrder of ticketOrders; track $index) { @for
               (ticket of ticketOrder.tickets; track $index) {
               <tr>
-                <td data-label="Azonosító">{{ ticketOrder.id }}</td>
                 <td data-label="Termék típusa">{{ ticket.type }}</td>
                 <td data-label="Mennyiség">{{ ticket.quantity }}</td>
                 <td data-label="Ár">
